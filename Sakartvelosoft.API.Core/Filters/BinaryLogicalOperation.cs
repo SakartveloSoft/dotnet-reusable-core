@@ -21,6 +21,7 @@ namespace Sakartvelosoft.API.Core.Filters
         public override void DetectNewParameters(IDictionary<string, IParameterReference> parametersBag)
         {
             Left.DetectNewParameters(parametersBag);
+            Right.DetectNewParameters(parametersBag);
         }
     }
 }

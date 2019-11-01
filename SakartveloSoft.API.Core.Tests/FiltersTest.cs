@@ -65,6 +65,17 @@ namespace SakartveloSoft.API.Core.Tests
             Assert.AreEqual(bag.prop1, parsedBag["prop1"]);
             Assert.AreEqual(bag.prop2, parsedBag["prop2"]);
             Assert.AreEqual(bag.prop3, parsedBag["prop3"]);
+
+            var builder = Filters.Builder<Obj, string>();
+
+            var param2 = builder.Parameter<string>("prop2");
+            var builtFilter = builder.Build(builder.Property(a => a.Name) == param2 && builder.Property(a => a.Balance) > builder.Parameter<decimal>("prop3"), bag);
+
+            Assert.IsTrue(builtFilter.HasParameter("prop2"), "Parameter prop3 not found in filter");
+            Assert.IsTrue(builtFilter.HasParameter<string>("prop2"), "Parameter prop3 not found filter");
+            Assert.AreEqual(builtFilter.GetParameterValue("prop3"), bag.prop3);
+            Assert.AreEqual(builtFilter.GetParameter<string>("prop2"), bag.prop2);
+            Assert.AreEqual(builtFilter.GetParameter(param2), bag.prop2);
         }
 
     }

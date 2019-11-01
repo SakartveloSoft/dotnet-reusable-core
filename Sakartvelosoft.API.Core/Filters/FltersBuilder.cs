@@ -27,12 +27,12 @@ namespace Sakartvelosoft.API.Core.Filters
             return new DataFilter<T, TKey>(new CompareOperation<TProperty>(new PropertyReference<T, TKey, TProperty>(name), new ScalarValue<TProperty>(value), op));
         }
 
-        public ComparationOperand<TValue> Parameter<TValue>(string name) where TValue : IComparable<TValue>, IEquatable<TValue>
+        public FilterParameter<TValue> Parameter<TValue>(string name) where TValue : IComparable<TValue>, IEquatable<TValue>
         {
             return new FilterParameter<TValue>(name);
         }
 
-        public DataFilter<T, TKey> Build(LogicalOperation op, object parametersBag)
+        public DataFilter<T, TKey> Build(LogicalOperation op, object parametersBag = null)
         {
             return new DataFilter<T, TKey>(operation: op, Filters.ParseValuesBag(parametersBag));
         }
