@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Sakartvelosoft.API.Core.DataModel
 {
-    public class SpecializedDataExistsRequest<T, TKey>: DataExistsRequest where T: class, IEntityWithKey<TKey>, new()
+    public class SpecializedDataExistsRequest<T>: DataExistsRequest where T: class, IEntityWithKey, new()
     {
-        public DataFilter<T, TKey> Filter { get; set; }
-        public TKey Key { get;  set; }
+        public DataFilter<T> Filter { get; set; }
+        public string Key { get;  set; }
     }
 }

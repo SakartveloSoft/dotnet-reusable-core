@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Sakartvelosoft.API.Core.DataModel
 {
-    public class ConditionalUpdateItemsRequest<T, TKey> where T: class, IEntityWithKey<TKey>, new()
+    public class ConditionalUpdateItemsRequest<T> where T: class, new()
     {
-        public DataFilter<T, TKey> Filter { get; set; }
+        public DataFilter<T> Filter { get; set; }
 
         public List<EntityPropertyChange> Changes { get; set; }
     }

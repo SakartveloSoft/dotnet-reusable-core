@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Sakartvelosoft.API.Core.DataModel
 {
-    public class SpecializedCountRequest<T, TKey> : CountDataRequest where T: class, IEntityWithKey<TKey>, new()
+    public class SpecializedCountRequest<T> : CountDataRequest where T: class, IEntityWithKey, new()
     { 
-        public DataFilter<T, TKey> Filter { get; set; }
+        public DataFilter<T> Filter { get; set; }
     }
 }

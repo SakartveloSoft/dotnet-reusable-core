@@ -9,17 +9,17 @@ namespace Sakartvelosoft.API.Core.Filters
 {
     public static class Filters
     {
-        public static ComparationOperand<TProperty> Property<T, TKey, TProperty>(params string[] names) where T : IEntityWithKey<TKey>
+        public static ComparationOperand<TProperty> Property<T, TProperty>(params string[] names) where T: class, new() 
             where TProperty : IEquatable<TProperty>, IComparable<TProperty>
         {
-            return new PropertyReference<T, TKey, TProperty>(names);
+            return new PropertyReference<T, TProperty>(names);
         }
 
-        public static ComparationOperand<TProperty> Property<T, TKey, TProperty>(Expression<Func<T, TProperty>> lambda)
-            where T : class, IEntityWithKey<TKey>, new()
+        public static ComparationOperand<TProperty> Property<T,  TProperty>(Expression<Func<T, TProperty>> lambda)
+            where T : class, new()
             where TProperty : IEquatable<TProperty>, IComparable<TProperty>
         {
-            return new PropertyReference<T, TKey, TProperty>(GetLambdaDataPath(lambda.Body));
+            return new PropertyReference<T, TProperty>(GetLambdaDataPath(lambda.Body));
         }
 
         internal static IReadOnlyList<string> GetLambdaDataPath(Expression body)
@@ -46,11 +46,11 @@ namespace Sakartvelosoft.API.Core.Filters
             return names;
         }
 
-        public static DataFilter<T, TKey> Compare<T, TKey, TProperty>(string name, TProperty value, FilterComparison op = FilterComparison.Equal)
-            where T : class, IEntityWithKey<TKey>, new()
+        public static DataFilter<T> Compare<T, TProperty>(string name, TProperty value, FilterComparison op = FilterComparison.Equal)
+            where T : class, new()
             where TProperty : IComparable<TProperty>, IEquatable<TProperty>
         {
-            return new DataFilter<T, TKey>(new CompareOperation<TProperty>(new PropertyReference<T, TKey, TProperty>(name), new ScalarValue<TProperty>(value), op));
+            return new DataFilter<T>(new CompareOperation<TProperty>(new PropertyReference<T, TProperty>(name), new ScalarValue<TProperty>(value), op));
         }
 
         public static ComparationOperand<TValue> Parameter<TValue>(string name) where TValue: IComparable<TValue>, IEquatable<TValue>
@@ -58,9 +58,9 @@ namespace Sakartvelosoft.API.Core.Filters
             return new FilterParameter<TValue>(name);
         }
 
-        public static FltersBuilder<T, TKey> Builder<T, TKey>() where T : class,IEntityWithKey<TKey>, new()
+        public static FltersBuilder<T> Builder<T>() where T : class, new()
         {
-            return new FltersBuilder<T, TKey>();
+            return new FltersBuilder<T>();
         }
 
 

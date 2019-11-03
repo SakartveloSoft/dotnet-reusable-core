@@ -7,10 +7,10 @@ namespace Sakartvelosoft.API.Core.DataModel
 {
     public interface IDataChangesTransaction: IDisposable
     {
-        IDataChangesTransaction CreateItems<T, TKey>(CreateItemsRequest<T, TKey> request) where T : class, IEntityWithKey<TKey>, new();
-        IDataChangesTransaction UpdateItems<T, TKey>(UpdateItemsRequest<T, TKey> request) where T : class, IEntityWithKey<TKey>, new();
-        IDataChangesTransaction ApplyConditionalUpdate<T, TKey>(ConditionalUpdateItemsRequest<T, TKey> request) where T : class, IEntityWithKey<TKey>, new();
-        IDataChangesTransaction DeleteItems<T, TKey>(DeleteItemRequest<T, TKey> request) where T : class, IEntityWithKey<TKey>, new();
+        IDataChangesTransaction CreateItems<T>(CreateItemsRequest<T> request) where T : class, new();
+        IDataChangesTransaction UpdateItems<T>(UpdateItemsRequest<T> request) where T : class, IEntityWithKey, new();
+        IDataChangesTransaction ApplyConditionalUpdate<T>(ConditionalUpdateItemsRequest<T> request) where T : class, IEntityWithKey, new();
+        IDataChangesTransaction DeleteItems<T>(DeleteItemRequest<T> request) where T : class, IEntityWithKey, new();
 
         Task Commit();
         Task Abort();

@@ -8,17 +8,17 @@ namespace Sakartvelosoft.API.Core.DataModel
 {
     public static class DatabaseExtensions
     {
-        public static Task<T> Get<T, TKey>(this IDatabase db, TKey id) where T : class, IEntityWithKey<TKey>, new()
+        public static Task<T> Get<T>(this IDatabase db, string id) where T : class, IEntityWithKey, new()
         {
-            return db.GetItem<T, TKey>(new GetSingleItemRequest<T, TKey>()
+            return db.GetItem<T, string>(new GetSingleItemRequest<T>()
             {
                 Key = id
             });
         }
 
-        public async static Task<List<T>> GetList<T, TKey>(this IDatabase db, IEnumerable<TKey> keys) where T : class, IEntityWithKey<TKey>, new()
+        public async static Task<List<T>> GetList<T>(this IDatabase db, IEnumerable<string> keys) where T : class, IEntityWithKey, new()
         {
-            var reply = await db.GetList(new GetItemsListRequest<T, TKey>()
+            var reply = await db.GetList(new GetItemsListRequest<T>()
             {
                 Keys = keys.ToList()
 
@@ -26,18 +26,18 @@ namespace Sakartvelosoft.API.Core.DataModel
             return reply.Items;
         }
 
-        public async static Task<List<T>> GetList<T, TKey>(this IDatabase db, params TKey[] keys) where T: class, IEntityWithKey<TKey>, new() 
+        public async static Task<List<T>> GetList<T>(this IDatabase db, params string[] keys) where T: class, IEntityWithKey, new() 
         {
-            var reply = await db.GetList(new GetItemsListRequest<T, TKey>()
+            var reply = await db.GetList(new GetItemsListRequest<T>()
             {
                 Keys = keys.ToList()
             });
             return reply.Items;
         }
 
-        public static async Task<bool> IsExists<T,TKey>(this IDatabase db, TKey key) where T: class, IEntityWithKey<TKey>, new()
+        public static async Task<bool> IsExists<T>(this IDatabase db, string key) where T: class, IEntityWithKey, new()
         {
-            var reply = await db.IsExists(new SpecializedDataExistsRequest<T, TKey>()
+            var reply = await db.IsExists(new SpecializedDataExistsRequest<T>()
             {
                 Key = key
             });

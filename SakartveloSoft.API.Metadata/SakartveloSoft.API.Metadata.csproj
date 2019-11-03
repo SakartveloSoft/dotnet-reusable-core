@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SakartveloSoft.API.DataAttributes\SakartveloSoft.API.DataAttributes.csproj" />
+    <ProjectReference Include="..\SakartveloSoft.API.ValidationAttributes\SakartveloSoft.API.ValidationAttributes.csproj" />
+  </ItemGroup>
+
+</Project>

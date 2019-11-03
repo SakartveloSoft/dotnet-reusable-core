@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Sakartvelosoft.API.Core.DataModel
 {
-    public interface IEntityWithKey<TKey>
+    public interface IEntityWithKey
     {
-        public TKey Id { get; set; }
+        public string Id { get; set; }
     }
 }

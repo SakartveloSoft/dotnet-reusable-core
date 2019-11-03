@@ -6,8 +6,8 @@ using System.Text;
 
 namespace Sakartvelosoft.API.Core.Filters
 {
-    public class PropertyReference<T, TKey, TProperty> : ComparationOperand<TProperty>
-        where T: IEntityWithKey<TKey>
+    public class PropertyReference<T, TProperty> : ComparationOperand<TProperty>
+        where T: class, new()
         where TProperty: IEquatable<TProperty>, IComparable<TProperty>
     {
         public readonly IReadOnlyList<string> DataPath;

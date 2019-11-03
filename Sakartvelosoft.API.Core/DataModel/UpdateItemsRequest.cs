@@ -2,8 +2,8 @@
 
 namespace Sakartvelosoft.API.Core.DataModel
 {
-    public class UpdateItemsRequest<T, Tkey> where T: class, IEntityWithKey<Tkey>,  new()
+    public class UpdateItemsRequest<T> where T: class, IEntityWithKey,  new()
     {
-        public List<EntityChangesPack<T, Tkey>> Changes { get; set; }
+        public List<EntityChangesPack<T>> Changes { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Sakartvelosoft.API.Core.Filters
 {
-    public class DataFilter<T, TKey> where T: class, IEntityWithKey<TKey>, new()
+    public class DataFilter<T> where T: class, new()
     {
         public readonly LogicalOperation Operation;
 
@@ -66,9 +66,9 @@ namespace Sakartvelosoft.API.Core.Filters
         }
 
 
-        public static implicit operator DataFilter<T, TKey>(LogicalOperation compare)
+        public static implicit operator DataFilter<T>(LogicalOperation compare)
         {
-            return new DataFilter<T, TKey>(compare);
+            return new DataFilter<T>(compare);
         }
     }
 }

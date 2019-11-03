@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Sakartvelosoft.API.Core.DataModel
 {
-    public class GetSingleItemRequest<T, TKey> : DataRequest<SingleValueDataResponse<T>> where T : class, IEntityWithKey<TKey>, new()
+    public class GetSingleItemRequest<T> : DataRequest<SingleValueDataResponse<T>> where T : class, IEntityWithKey, new()
     {
-        public TKey Key { get; internal set; }
+        public string Key { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Sakartvelosoft.API.Core.DataModel
 {
-    public class ListDataResponse<T, TKey>: DataResponse where T: class, IEntityWithKey<TKey>, new()
+    public class ListDataResponse<T>: DataResponse where T: class, new()
     {
         public List<T> Items { get; set; }
         public bool PagingApplied { get; set; }

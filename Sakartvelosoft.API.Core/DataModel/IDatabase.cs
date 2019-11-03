@@ -7,15 +7,16 @@ namespace Sakartvelosoft.API.Core.DataModel
 {
     public interface IDatabase
     {
-        Task<ListDataResponse<T, TKey>> Find<T, TKey>(DataListRequest<T, TKey> request) where T: class, IEntityWithKey<TKey>, new();
-        Task<CountDataResponse> Count<T, TKey>(SpecializedCountRequest<T, TKey> request) where T : class, IEntityWithKey<TKey>, new();
-        Task<IsExistsDataResponse> IsExists<T, TKey>(SpecializedDataExistsRequest<T, TKey> request) where T : class, IEntityWithKey<TKey>, new();
+        Task<ListDataResponse<T>> Find<T>(DataListRequest<T> request) where T: class, IEntityWithKey, new();
+        Task<CountDataResponse> Count<T>(SpecializedCountRequest<T> request) where T : class, IEntityWithKey, new();
+        Task<IsExistsDataResponse> IsExists<T>(DataListRequest<T> request) where T : class, IEntityWithKey, new();
+        Task<IsExistsDataResponse> IsExists<T>(SpecializedDataExistsRequest<T> request) where T : class, IEntityWithKey, new();
 
 
-        Task<T> GetItem<T, TKey>(GetSingleItemRequest<T, TKey> request) where T : class, IEntityWithKey<TKey>, new();
+        Task<T> GetItem<T, TKey>(GetSingleItemRequest<T> request) where T : class, IEntityWithKey, new();
 
 
-        Task<GetItemsListResponse<T, TKey>> GetList<T, TKey>(GetItemsListRequest<T, TKey> request) where T : class, IEntityWithKey<TKey>, new();
+        Task<GetItemsListResponse<T>> GetList<T>(GetItemsListRequest<T> request) where T : class, IEntityWithKey, new();
 
         IDataChangesTransaction BeginDataUpdates();
 

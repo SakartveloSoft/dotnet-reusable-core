@@ -6,25 +6,25 @@ using System.Reflection;
 
 namespace Sakartvelosoft.API.Core.Filters
 {
-    public class FltersBuilder<T, TKey> where T : class, DataModel.IEntityWithKey<TKey>, new()
+    public class FltersBuilder<T> where T : class, new()
     {
         public ComparationOperand<TProperty> Property<TProperty>(params string[] names)
             where TProperty : IEquatable<TProperty>, IComparable<TProperty>
         {
-            return new PropertyReference<T, TKey, TProperty>(names);
+            return new PropertyReference<T, TProperty>(names);
         }
 
         public ComparationOperand<TProperty> Property<TProperty>(Expression<Func<T, TProperty>> lambda)
             where TProperty : IEquatable<TProperty>, IComparable<TProperty>
         {
-            return new PropertyReference<T, TKey, TProperty>(Filters.GetLambdaDataPath(lambda.Body));
+            return new PropertyReference<T, TProperty>(Filters.GetLambdaDataPath(lambda.Body));
         }
 
 
-        public DataFilter<T, TKey> Compare<TProperty>(string name, TProperty value, FilterComparison op = FilterComparison.Equal)
+        public DataFilter<T> Compare<TProperty>(string name, TProperty value, FilterComparison op = FilterComparison.Equal)
             where TProperty : IComparable<TProperty>, IEquatable<TProperty>
         {
-            return new DataFilter<T, TKey>(new CompareOperation<TProperty>(new PropertyReference<T, TKey, TProperty>(name), new ScalarValue<TProperty>(value), op));
+            return new DataFilter<T>(new CompareOperation<TProperty>(new PropertyReference<T, TProperty>(name), new ScalarValue<TProperty>(value), op));
         }
 
         public FilterParameter<TValue> Parameter<TValue>(string name) where TValue : IComparable<TValue>, IEquatable<TValue>
@@ -32,9 +32,9 @@ namespace Sakartvelosoft.API.Core.Filters
             return new FilterParameter<TValue>(name);
         }
 
-        public DataFilter<T, TKey> Build(LogicalOperation op, object parametersBag = null)
+        public DataFilter<T> Build(LogicalOperation op, object parametersBag = null)
         {
-            return new DataFilter<T, TKey>(operation: op, Filters.ParseValuesBag(parametersBag));
+            return new DataFilter<T>(operation: op, Filters.ParseValuesBag(parametersBag));
         }
     }
 }

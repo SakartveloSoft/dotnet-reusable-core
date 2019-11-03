@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SakartveloSoft.API.Core.Tests
 {
-    class Obj : IEntityWithKey<string>
+    class Obj : IEntityWithKey
     {
         public string Id { get; set; }
 
@@ -21,15 +21,15 @@ namespace SakartveloSoft.API.Core.Tests
         public void TestFiltersConstruction()
         {
             {
-                var propertyRef = Filters.Property<Obj, string, decimal>(obj => obj.Balance);
+                var propertyRef = Filters.Property<Obj,  decimal>(obj => obj.Balance);
                 Assert.AreEqual(propertyRef.NodeType, FilterNodeType.Property);
                 var comparison = propertyRef > 4m;
                 Assert.AreEqual(comparison.NodeType, FilterNodeType.Compare);
-                var logicalOp = comparison && Filters.Property<Obj, string, string>(obj => obj.Name) == "Test";
+                var logicalOp = comparison && Filters.Property<Obj, string>(obj => obj.Name) == "Test";
                 Assert.AreEqual(logicalOp.NodeType, FilterNodeType.BinaryLogicOp);
                 var param = Filters.Parameter<string>("nameValue");
             }
-            var builder = Filters.Builder<Obj, string>();
+            var builder = Filters.Builder<Obj>();
 
             {
                 var propertyRef = builder.Property<decimal>(obj => obj.Balance);
@@ -66,7 +66,7 @@ namespace SakartveloSoft.API.Core.Tests
             Assert.AreEqual(bag.prop2, parsedBag["prop2"]);
             Assert.AreEqual(bag.prop3, parsedBag["prop3"]);
 
-            var builder = Filters.Builder<Obj, string>();
+            var builder = Filters.Builder<Obj>();
 
             var param2 = builder.Parameter<string>("prop2");
             var builtFilter = builder.Build(builder.Property(a => a.Name) == param2 && builder.Property(a => a.Balance) > builder.Parameter<decimal>("prop3"), bag);

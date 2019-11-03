@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Sakartvelosoft.API.Core.DataModel
 {
-    public class DataListRequest<T, TKey> : DataSearchRequest<ListDataResponse<T, TKey>> where T: class, IEntityWithKey<TKey>, new()
+    public class DataListRequest<T> : DataSearchRequest<ListDataResponse<T>> where T: class, new()
     {
-        DataFilter<T, TKey> Filter { get; set; }
+        DataFilter<T> Filter { get; set; }
 
         public int? PageSize { get; set; }
 

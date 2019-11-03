@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Sakartvelosoft.API.Core.DataModel
 {
-    public class DeleteItemRequest<T, TKey>: DataRequest<NoResultResponse> where T: class, IEntityWithKey<TKey>, new()
+    public class DeleteItemRequest<T>: DataRequest<NoResultResponse> where T: class, IEntityWithKey, new()
     {
-        public TKey Key { get; set; }
-        public List<TKey> Keys { get; set; }
+        public string Key { get; set; }
+        public List<string> Keys { get; set; }
 
-        public Boolean IsBatchDelete { get; set; }
+        public bool IsBatchDelete { get; set; }
     }
 }

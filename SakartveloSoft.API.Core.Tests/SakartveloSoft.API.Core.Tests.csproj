@@ -15,6 +15,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Sakartvelosoft.API.Core\Sakartvelosoft.API.Core.csproj" />
+    <ProjectReference Include="..\SakartveloSoft.API.DataAttributes\SakartveloSoft.API.DataAttributes.csproj" />
+    <ProjectReference Include="..\SakartveloSoft.API.Metadata\SakartveloSoft.API.Metadata.csproj" />
+    <ProjectReference Include="..\SakartveloSoft.API.ValidationAttributes\SakartveloSoft.API.ValidationAttributes.csproj" />
   </ItemGroup>
 
 </Project>
