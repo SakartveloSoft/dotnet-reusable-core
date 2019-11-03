@@ -12,6 +12,8 @@ namespace SakartveloSoft.API.ValidationAttributes
 
         }
 
+        public override string ErrorCode => ErrorCodes.InvalidFloatingNumber;
+
         public override bool CanValidateType(Type type)
         {
             return type == typeof(float) || type == typeof(double) || type == typeof(decimal)

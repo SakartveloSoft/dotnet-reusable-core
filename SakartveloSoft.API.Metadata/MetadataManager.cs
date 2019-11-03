@@ -71,6 +71,13 @@ namespace SakartveloSoft.API.Metadata
             get { return EnsureForMetaType(type); }
         }
 
+        public ObjectValidationReport ValidateObject<T>(T instance) where T: class
+        {
+            var type = EnsureForMetaType(typeof(T));
+            return ValidateObject(type, instance);
+
+        }
+
         public MetaType DiscoverType<T>() where T : class, new()
         {
             return EnsureForMetaType(typeof(T));
@@ -123,14 +130,17 @@ namespace SakartveloSoft.API.Metadata
             KnownPropertyAttributes.AddAttributeHandler<Required>((type, prop, req) =>
             {
                 prop.MakeRequired();
+                prop.AddValidatorImplementation(req);
             });
             KnownPropertyAttributes.AddAttributeHandler<InRangeAttribute>((type, prop, range) =>
             {
                 prop.RestrictToRange(range.Min, range.Max);
+                prop.AddValidatorImplementation(range);
             });
             KnownPropertyAttributes.AddAttributeHandler<InListAttribute>((type, prop, listAttr) =>
             {
                 prop.RestrictToList(listAttr.Values);
+                prop.AddValidatorImplementation(listAttr);
             });
             KnownPropertyAttributes.AddAttributeHandler<EntityKeyAttribute>((metaType, prop, keyAttr) =>
             {
@@ -200,6 +210,25 @@ namespace SakartveloSoft.API.Metadata
                 GenerateObjectIdentity(metaType, result);
             }
             return result;
+        }
+
+        protected ObjectValidationReport BeginValidation(MetaType metaType, object target)
+        {
+            return new ObjectValidationReport()
+            {
+                MetaTypeName = metaType.TypeAlias,
+                ObjectIdentity = metaType.TryGetObjectKeyString(target)
+            };
+        }
+
+        protected ObjectValidationReport ValidateObject(MetaType metaType, object instance)
+        {
+            var report = BeginValidation(metaType, instance);
+            foreach(var prop in metaType.MetaProperties.Values)
+            {
+                prop.ValidateValueOfObject(instance, report);
+            }
+            return report;
         }
 
     }

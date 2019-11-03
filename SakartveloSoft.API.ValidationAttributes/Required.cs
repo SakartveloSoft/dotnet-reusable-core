@@ -10,6 +10,8 @@ namespace SakartveloSoft.API.ValidationAttributes
         public Required(string message = null):base(message ?? "{name} is required") {
         }
 
+        public override string ErrorCode => ErrorCodes.Required;
+
         public override bool CanValidateType(Type type)
         {
             return true;
@@ -17,7 +19,15 @@ namespace SakartveloSoft.API.ValidationAttributes
 
         public override bool IsValueValid(object value)
         {
-            return value != null;
+            if (value == null)
+            {
+                return false;
+            }
+            if (typeof(string).IsInstanceOfType(value))
+            {
+                return !value.Equals(String.Empty);
+            }
+            return true;
         }
     }
 

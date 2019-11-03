@@ -114,5 +114,23 @@ namespace SakartveloSoft.API.Metadata
                 throw new ArgumentException(@$"Unknown field {propInfo.Name}", "field");
             }
         }
+
+        public string TryGetObjectKeyString(object target)
+        {
+            if (HasKeyProperty)
+            {
+                var value = KeyProperty.GetValueForObject(target);
+                if (value == null)
+                {
+                    return null;
+                } else
+                {
+                    return value.ToString();
+                }
+            } else
+            {
+                return null;
+            }
+        }
     }
 }

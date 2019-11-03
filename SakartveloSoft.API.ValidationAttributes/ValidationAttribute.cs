@@ -16,5 +16,7 @@ namespace SakartveloSoft.API.ValidationAttributes
         public abstract bool IsValueValid(object value);
 
         public abstract bool CanValidateType(Type type);
+
+        public abstract string ErrorCode { get; }
     }
 }

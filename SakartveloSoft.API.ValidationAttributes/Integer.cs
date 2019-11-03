@@ -11,6 +11,9 @@ namespace SakartveloSoft.API.ValidationAttributes
         {
 
         }
+
+        public override string ErrorCode => ErrorCodes.InvalidIntegerNumber;
+
         public override bool CanValidateType(Type type)
         {
             return type == typeof(int) || type == typeof(long) || type == typeof(decimal)

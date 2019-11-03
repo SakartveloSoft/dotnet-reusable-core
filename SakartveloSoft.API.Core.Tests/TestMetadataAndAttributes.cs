@@ -5,6 +5,7 @@ using SakartveloSoft.API.ValidationAttributes;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace SakartveloSoft.API.Core.Tests
 {
@@ -44,6 +45,24 @@ namespace SakartveloSoft.API.Core.Tests
             Assert.IsNotNull(newObj.Id);
             Assert.IsTrue(newObj.Id.StartsWith("to_"), "Incorrect oject id was generated");
             Console.WriteLine($@"Generated id {newObj.Id} for tests");
+        }
+
+        [TestMethod]
+        public void TestValidationFlow()
+        {
+            var metadataManager = new MetadataManager();
+            metadataManager.DiscoverAssembly(this.GetType().Assembly);
+            Assert.IsTrue(metadataManager.HasMetadataForType<TestObj>(), "Type information was not added with autodiscovery by assembly");
+            var newObj = metadataManager.CreateNewObject<TestObj>();
+            var report = metadataManager.ValidateObject<TestObj>(newObj);
+            Assert.IsFalse(report.IsValid, "Validation report for new blank test object must be invalid");
+            newObj.Name = "";
+            report = metadataManager.ValidateObject(newObj);
+            Assert.IsFalse(report.IsValid, "Validation report for new blank test object must be invalid with blank name");
+            newObj.Name = "Test Thingy";
+            report = metadataManager.ValidateObject(newObj);
+            Assert.IsTrue(report.IsValid, "Validation report for updated test object must be valid with name set");
+
         }
     }
 

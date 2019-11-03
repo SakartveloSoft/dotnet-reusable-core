@@ -35,6 +35,8 @@ namespace SakartveloSoft.API.ValidationAttributes
         public decimal? Min { get;  set; }
         public decimal? Max { get;  set; }
 
+        public override string ErrorCode => ErrorCodes.OutOfRangeValue;
+
         public override bool CanValidateType(Type type)
         {
             return type == typeof(int) || type == typeof(long) || type == typeof(float) || type == typeof(double) || type == typeof(decimal)

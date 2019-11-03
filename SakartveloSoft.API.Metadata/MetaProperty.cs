@@ -1,6 +1,8 @@
 ﻿using SakartveloSoft.API.DataAttributes;
+using SakartveloSoft.API.ValidationAttributes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -12,10 +14,14 @@ namespace SakartveloSoft.API.Metadata
         public MetaType DeclaredAt { get; private set; }
         public MemberInfo Member { get; private set; }
 
+        public Type ValuesType { get; private set; }
+
         public string Name { get; private set; }
 
         private Func<object, object> valueGetter;
         private Action<object, object> valueSetter;
+
+        private List<IValuesValidator> rules = new List<IValuesValidator>(); 
 
         public MetaProperty(MetaType declaredAt, MemberInfo memberInfo)
         {
@@ -36,6 +42,8 @@ namespace SakartveloSoft.API.Metadata
                 valueSetter = (target, value) => propSetter.Invoke(target, new[] { value });
             }
         }
+
+        
 
         public bool Required { get; private set; }
 
@@ -138,6 +146,48 @@ namespace SakartveloSoft.API.Metadata
         public void SetValueForObject(object target, object value)
         {
             valueSetter(target, value);
+        }
+
+        public object GetValueForObject(object target)
+        {
+            return valueGetter(target);
+        }
+
+        public MetaProperty AddValidatorImplementation([NotNull]IValuesValidator impl)
+        {
+            if (impl.CanValidateType(ValuesType))
+            {
+                this.rules.Add(impl);
+            }
+            return this;
+        }
+
+        public void ValidateValueOfObject(object instance, ObjectValidationReport report)
+        {
+            var value = GetValueForObject(instance);
+            if (rules != null && rules.Count > 0)
+            {
+                foreach(var rule in rules)
+                {
+                    if (!rule.IsValueValid(value))
+                    {
+                        report.AddError(new ValidationError
+                        {
+                            ErrorCode = rule.ErrorCode,
+                            Property = Name,
+                            Value = value,
+                            Message = GenerateValidationMessage(rule.MessageTemplate, Name)
+                        });
+                        break;
+                    }
+                    
+                }
+            }
+        }
+
+        private static string GenerateValidationMessage(string messageTemplate, string name)
+        {
+            return messageTemplate.Replace("{name}", name);
         }
     }
 }
