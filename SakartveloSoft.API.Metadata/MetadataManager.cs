@@ -23,7 +23,10 @@ namespace SakartveloSoft.API.Metadata
         {
             foreach(var type in assembly.ExportedTypes)
             {
-                EnsureForMetaType(type);
+                if (type.IsDefined(typeof(KnownType)))
+                {
+                    EnsureForMetaType(type);
+                }
             }
             return this;
         }
@@ -54,7 +57,13 @@ namespace SakartveloSoft.API.Metadata
                     KnownPropertyAttributes.ApplyDiscoveredAttributes(metaType, prop, prop.Member.GetCustomAttributes());
                 }
             }
+            result.PropertiesUpdated();
             return result;
+        }
+
+        public bool HasMetadataForType<T>() where T: class
+        {
+            return this.metaTypes.ContainsKey(typeof(T).FullName);
         }
 
         public MetaType this[Type type]
@@ -153,6 +162,34 @@ namespace SakartveloSoft.API.Metadata
             return this.identitiesFactory.GeneratePrefixedId(prefix);
         }
 
+        protected void GenerateObjectIdentity(MetaType metaType, object instance, bool requireKeyProperty = false)
+        {
+            if (metaType.HasKeyProperty)
+            {
+                var keyType = metaType.KeyProperty.KeyType.Value;
+                switch (keyType)
+                {
+                    case EntityKeyType.PrefixedRandomString:
+                        metaType.KeyProperty.SetValueForObject(instance, identitiesFactory.GeneratePrefixedId(metaType.IdPrefix));
+                        break;
+                    case EntityKeyType.PrefixedCompactRandomString:
+                        metaType.KeyProperty.SetValueForObject(instance, identitiesFactory.GenerateCompactPrefixedId(metaType.IdPrefix));
+                        break;
+                    case EntityKeyType.Guid:
+                        metaType.KeyProperty.SetValueForObject(instance, Guid.NewGuid());
+                        break;
+                }
+            } else if (requireKeyProperty)
+            {
+                throw new InvalidOperationException("Type does not have key property bound. Please update type metadata");
+            }
+        }
+
+        public void AssignObjectId<T>(T instance) where T: class
+        {
+            GenerateObjectIdentity(EnsureForMetaType(typeof(T)), instance, true);
+        }
+
         public T CreateNewObject<T>(bool forLoading = false) where T: class, new()
         {
             var result = new T();
@@ -160,22 +197,7 @@ namespace SakartveloSoft.API.Metadata
             {
                 var metaType = EnsureForMetaType(typeof(T));
                 ApplyDefaultValues(metaType, result);
-                if (metaType.HasKeyProperty)
-                {
-                    var keyType = metaType.KeyProperty.KeyType.Value;
-                    switch(keyType)
-                    {
-                        case EntityKeyType.PrefixedRandomString:
-                            metaType.KeyProperty.SetValueForObject(result, identitiesFactory.GeneratePrefixedId(metaType.IdPrefix));
-                            break;
-                        case EntityKeyType.PrefixedCompactRandomString:
-                            metaType.KeyProperty.SetValueForObject(result, identitiesFactory.GenerateCompactPrefixedId(metaType.IdPrefix));
-                            break;
-                        case EntityKeyType.Guid:
-                            metaType.KeyProperty.SetValueForObject(result, Guid.NewGuid());
-                            break;
-                    }
-                }
+                GenerateObjectIdentity(metaType, result);
             }
             return result;
         }

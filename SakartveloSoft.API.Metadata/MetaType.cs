@@ -55,7 +55,11 @@ namespace SakartveloSoft.API.Metadata
                 MetaProperty field = new MetaProperty(this, fieldInfo);
                 MetaProperties.Add(field.Name, field);
             }
-            KeyProperty = MetaProperties.Values.FirstOrDefault(prop => prop.IsKeyProperty);
+        }
+
+        public void PropertiesUpdated()
+        {
+            KeyProperty = MetaProperties.Values.FirstOrDefault(a => a.IsKeyProperty);
         }
 
         public MetaType EnableKeywordsSearch()
