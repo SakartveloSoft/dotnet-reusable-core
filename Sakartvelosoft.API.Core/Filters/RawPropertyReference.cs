@@ -1,12 +1,20 @@
-﻿namespace Sakartvelosoft.API.Core.Filters
+﻿using System.Collections.Generic;
+
+namespace Sakartvelosoft.API.Core.Filters
 {
-    internal class RawPropertyReference
+    public class RawPropertyReference: DynamicOperand
     {
-        private string name;
+        public string Name { get; private set; }
 
         public RawPropertyReference(string name)
         {
-            this.name = name;
+            NodeType = FilterNodeType.Property;
+            this.Name = name;
+        }
+
+        public override void DetectNewParameters(IDictionary<string, IParameterReference> parametersBag)
+        {
+            
         }
     }
 }

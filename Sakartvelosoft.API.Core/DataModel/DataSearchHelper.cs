@@ -36,6 +36,15 @@ namespace Sakartvelosoft.API.Core.DataModel
                         throw new ArgumentException("Unknown parameter " + prop.Name);
                 }
             }
+            return result;
+        }
+
+        public static DataListRequest<T> ParseSearchRequest<T>(string jsonText) where T: class, new()
+        {
+            using(var doc = JsonDocument.Parse(jsonText))
+            {
+                return ParseSearchRequest<T>(doc.RootElement);
+            }
         }
     }
 }

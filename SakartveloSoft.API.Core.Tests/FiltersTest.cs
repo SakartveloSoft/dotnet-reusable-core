@@ -78,5 +78,20 @@ namespace SakartveloSoft.API.Core.Tests
             Assert.AreEqual(builtFilter.GetParameter(param2), bag.prop2);
         }
 
+        [TestMethod]
+        public void FindRequestParsingTest()
+        {
+            var request = DataSearchHelper.ParseSearchRequest<Obj>(@"
+{
+    ""filters"": {
+        ""prop2"": ""Some text"", 
+        ""prop3"": { ""gte"": 2 }
+    }
+}");
+            Assert.IsNull(request.Keywords);
+            Assert.IsNotNull(request.Filter);
+            Assert.IsInstanceOfType(request.Filter.Operation, typeof(Sakartvelosoft.API.Core.Filters.MultOperandsBooleanOperation));
+        }
+
     }
 }

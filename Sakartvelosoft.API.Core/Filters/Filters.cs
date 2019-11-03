@@ -96,6 +96,21 @@ namespace Sakartvelosoft.API.Core.Filters
             }
             return result;
         }
+
+        public static DynamicScalar DynamicValue(object value)
+        {
+            return new DynamicScalar(value);
+        }
+
+        public static RawPropertyReference RawProperty(string name)
+        {
+            return new RawPropertyReference(name);
+        }
+
+        public static LogicalOperation CompareValue(string propName, object value, FilterComparison op = FilterComparison.Equal)
+        {
+            return new DynamicComparation(propName, value, op);
+        }
     }
 
 

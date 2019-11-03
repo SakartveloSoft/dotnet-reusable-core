@@ -12,6 +12,7 @@ namespace Sakartvelosoft.API.Core.Filters
         UnaryLogicOp,
         Value,
         Property,
-        Parameter
+        Parameter,
+        DynamicCompare
     }
 }
