@@ -7,7 +7,9 @@ namespace Sakartvelosoft.API.Core.DataModel
 {
     public class DataListRequest<T> : DataSearchRequest<ListDataResponse<T>> where T: class, new()
     {
-        DataFilter<T> Filter { get; set; }
+        public DataFilter<T> Filter { get; set; }
+
+        public string Keywords { get; set; }
 
         public int? PageSize { get; set; }
 
@@ -21,7 +23,7 @@ namespace Sakartvelosoft.API.Core.DataModel
             }
         }
 
-        bool? SortAscending { get; set; }
+        public bool? SortAscending { get; set; }
 
         public string SortOption { get; set; }
 
