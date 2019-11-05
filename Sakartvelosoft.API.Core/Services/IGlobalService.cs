@@ -9,7 +9,6 @@ namespace SakartveloSoft.API.Core.Services
     public interface IGlobalService
     {
         public IConfigurationReader Configuration { get; set; }
-        public Task WaitForUsableState();
 
         public bool Ready { get; }
 

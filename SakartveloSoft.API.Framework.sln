@@ -20,7 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakartveloSoft.API.DataAttr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakartveloSoft.API.Metadata", "SakartveloSoft.API.Metadata\SakartveloSoft.API.Metadata.csproj", "{44596EED-F431-441E-BCDF-D05787ACDF3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApp", "TestWebApp\TestWebApp.csproj", "{3507502D-02B3-4B2E-99ED-A5868F3B6526}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApp", "TestWebApp\TestWebApp.csproj", "{3507502D-02B3-4B2E-99ED-A5868F3B6526}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakartveloSoft.API.Framework.Adapters", "SakartveloSoft.API.Framework.Adapters\SakartveloSoft.API.Framework.Adapters.csproj", "{A65B8BCC-1A9C-446D-8503-5E1BB56474A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +58,10 @@ Global
 		{3507502D-02B3-4B2E-99ED-A5868F3B6526}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3507502D-02B3-4B2E-99ED-A5868F3B6526}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3507502D-02B3-4B2E-99ED-A5868F3B6526}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A65B8BCC-1A9C-446D-8503-5E1BB56474A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A65B8BCC-1A9C-446D-8503-5E1BB56474A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A65B8BCC-1A9C-446D-8503-5E1BB56474A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A65B8BCC-1A9C-446D-8503-5E1BB56474A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

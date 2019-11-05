@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SakartveloSoft.API.Core.Logging
 {
-    public interface INamedScope
+    public interface ILoggingScope
     {
         string Name { get; }
     }

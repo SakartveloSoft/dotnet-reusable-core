@@ -10,6 +10,6 @@ namespace SakartveloSoft.API.Core.Logging
         public ILogger GetRootLogger();
         public ILogger CreateScopedLogger(params string[] names);
 
-        public ILogger CreateScopedLogger<TScope>(TScope scope) where TScope: INamedScope;
+        public ILogger CreateScopedLogger<TScope>(TScope scope) where TScope: ILoggingScope;
     }
 }
