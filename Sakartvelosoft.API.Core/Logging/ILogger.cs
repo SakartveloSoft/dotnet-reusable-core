@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sakartvelosoft.API.Core.Logging
+namespace SakartveloSoft.API.Core.Logging
 {
     public interface ILogger
     {
@@ -10,5 +10,7 @@ namespace Sakartvelosoft.API.Core.Logging
         void Write(LogMessage message);
 
         ILogger CreateSubLogger(params string[] subNames);
+
+        ILogger CreateSubLogger<TScope>(TScope scope) where TScope: ILoggingScope;
     }
 }

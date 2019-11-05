@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Sakartvelosoft.API.Core.DataModel
+namespace SakartveloSoft.API.Core.DataModel
 {
     public class EntityChangesPack<T> where T : class, IEntityWithKey, new() 
     {

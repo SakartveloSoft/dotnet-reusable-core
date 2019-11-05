@@ -1,9 +1,10 @@
-﻿using System;
+﻿using SakartveloSoft.API.Core.Filtering;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 
-namespace Sakartvelosoft.API.Core.DataModel
+namespace SakartveloSoft.API.Core.DataModel
 {
     public static class DataSearchHelper
     {
@@ -30,7 +31,7 @@ namespace Sakartvelosoft.API.Core.DataModel
                         break;
                     case "filter":
                     case "filters":
-                        result.Filter = Filters.Filters.Builder<T>().FromJSON(prop.Value);
+                        result.Filter = Filters.Builder<T>().FromJSON(prop.Value);
                         break;
                     default:
                         throw new ArgumentException("Unknown parameter " + prop.Name);

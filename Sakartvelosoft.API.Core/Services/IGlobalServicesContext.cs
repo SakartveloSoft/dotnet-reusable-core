@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sakartvelosoft.API.Core.Services
+namespace SakartveloSoft.API.Core.Services
 {
     public interface IGlobalServicesContext
     {

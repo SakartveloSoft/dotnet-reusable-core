@@ -1,9 +1,9 @@
-﻿using Sakartvelosoft.API.Core.Configuration;
+﻿using SakartveloSoft.API.Core.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sakartvelosoft.API.Core
+namespace SakartveloSoft.API.Core
 {
     public interface IAPIContext
     {

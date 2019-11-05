@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sakartvelosoft.API.Core.Configuration
+namespace SakartveloSoft.API.Core.Configuration
 {
     public class ConfigurationValuesBag : Dictionary<string, ConfigurationValue>, IConfigurationReader
     {

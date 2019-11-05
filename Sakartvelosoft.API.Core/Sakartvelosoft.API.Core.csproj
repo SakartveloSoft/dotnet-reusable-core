@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>SakartveloSoft.API.Core</RootNamespace>
+    <AssemblyName>SakartveloSoft.API.Core</AssemblyName>
   </PropertyGroup>
 
 </Project>

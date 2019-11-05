@@ -1,9 +1,9 @@
-﻿using Sakartvelosoft.API.Core.Filters;
+﻿using SakartveloSoft.API.Core.Filtering;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sakartvelosoft.API.Core.DataModel
+namespace SakartveloSoft.API.Core.DataModel
 {
     public class DataListRequest<T> : DataSearchRequest<ListDataResponse<T>> where T: class, new()
     {

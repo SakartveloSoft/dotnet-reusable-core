@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sakartvelosoft.API.Core.DataModel
+namespace SakartveloSoft.API.Core.DataModel
 {
     public class CreateItemsRequest<T> where T: class, new()
     {

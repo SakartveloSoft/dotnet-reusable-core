@@ -1,4 +1,4 @@
-﻿namespace Sakartvelosoft.API.Core.DataModel
+﻿namespace SakartveloSoft.API.Core.DataModel
 {
     public class EntityPropertyChange
     {

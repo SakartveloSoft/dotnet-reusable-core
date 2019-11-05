@@ -1,9 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Sakartvelosoft.API.Core.DataModel;
-using Sakartvelosoft.API.Core.Filters;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using SakartveloSoft.API.Core.DataModel;
+using SakartveloSoft.API.Core.Filtering;
 
 namespace SakartveloSoft.API.Core.Tests
 {
@@ -21,7 +18,7 @@ namespace SakartveloSoft.API.Core.Tests
         public void TestFiltersConstruction()
         {
             {
-                var propertyRef = Filters.Property<Obj,  decimal>(obj => obj.Balance);
+                var propertyRef = Filters.Property<Obj, decimal>(obj => obj.Balance);
                 Assert.AreEqual(propertyRef.NodeType, FilterNodeType.Property);
                 var comparison = propertyRef > 4m;
                 Assert.AreEqual(comparison.NodeType, FilterNodeType.Compare);
@@ -85,12 +82,13 @@ namespace SakartveloSoft.API.Core.Tests
 {
     ""filters"": {
         ""prop2"": ""Some text"", 
-        ""prop3"": { ""gte"": 2 }
+        ""prop3"": { ""$gte"": 2 }
     }
 }");
             Assert.IsNull(request.Keywords);
             Assert.IsNotNull(request.Filter);
-            Assert.IsInstanceOfType(request.Filter.Operation, typeof(Sakartvelosoft.API.Core.Filters.MultOperandsBooleanOperation));
+            Assert.AreNotEqual(request.Filter.Operation.NodeType, FilterNodeType.Unknown, "Node type must be well defined for all nodes");
+            Assert.IsInstanceOfType(request.Filter.Operation, typeof(MultOperandsBooleanOperation));
         }
 
     }

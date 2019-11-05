@@ -1,10 +1,10 @@
-﻿using Sakartvelosoft.API.Core.Configuration;
+﻿using SakartveloSoft.API.Core.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sakartvelosoft.API.Core.Services
+namespace SakartveloSoft.API.Core.Services
 {
     public interface IGlobalService
     {

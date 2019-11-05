@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Sakartvelosoft.API.Core.DataModel
+namespace SakartveloSoft.API.Core.DataModel
 {
     public class UpdateItemsRequest<T> where T: class, IEntityWithKey,  new()
     {

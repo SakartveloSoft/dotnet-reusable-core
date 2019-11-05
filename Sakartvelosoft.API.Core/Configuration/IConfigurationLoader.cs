@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sakartvelosoft.API.Core.Configuration
+namespace SakartveloSoft.API.Core.Configuration
 {
     public interface IConfigurationLoader
     {

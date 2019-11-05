@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Sakartvelosoft.API.Core.Configuration;
+using SakartveloSoft.API.Core.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Text;

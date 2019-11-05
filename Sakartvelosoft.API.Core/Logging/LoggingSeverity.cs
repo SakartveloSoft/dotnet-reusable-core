@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sakartvelosoft.API.Core.Logging
+namespace SakartveloSoft.API.Core.Logging
 {
     public enum LoggingSeverity
     {

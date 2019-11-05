@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sakartvelosoft.API.Core.DataModel
+namespace SakartveloSoft.API.Core.DataModel
 {
     public abstract class DataSearchRequest<TResponse>: DataRequest<TResponse> where TResponse: DataResponse, new()
     {

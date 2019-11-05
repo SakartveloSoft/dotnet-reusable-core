@@ -1,9 +1,9 @@
-﻿using Sakartvelosoft.API.Core.Services;
+﻿using SakartveloSoft.API.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Sakartvelosoft.API.Core.Configuration
+namespace SakartveloSoft.API.Core.Configuration
 {
     public interface IConfigurationService: IGlobalService
     {

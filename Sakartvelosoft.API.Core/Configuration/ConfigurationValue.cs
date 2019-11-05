@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Text.Json;
 
-namespace Sakartvelosoft.API.Core.Configuration
+namespace SakartveloSoft.API.Core.Configuration
 {
     public class ConfigurationValue
     {
