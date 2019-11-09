@@ -15,19 +15,24 @@ namespace SakartveloSoft.API.Core.Logging
             });
         }
 
-        public static void Information(ILogger logger, string message, params object[] args)
+        public static void Information(this ILogger logger, string message, params object[] args)
         {
             logger.Write(LoggingSeverity.Information, message, args);
         }
 
-        public static void Warning(ILogger logger, string message, params object[] args)
+        public static void Warning(this ILogger logger, string message, params object[] args)
         {
             logger.Write(LoggingSeverity.Warning, message, args);
         }
 
-        public static void Error(ILogger logger, string message, params object[] args)
+        public static void Error(this ILogger logger, string message, params object[] args)
         {
             logger.Write(LoggingSeverity.Error, message, args);
+        }
+
+        public static void Debug(this ILogger logger, string message, params object[] args)
+        {
+            logger.Write(LoggingSeverity.Debugging, message, args);
         }
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SakartveloSoft.API.Core.Logging;
 using SakartveloSoft.API.Framework.Adapters;
 
 namespace TestWebApp

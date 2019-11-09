@@ -5,13 +5,8 @@ using System.Text;
 
 namespace SakartveloSoft.API.Core.Logging
 {
-    public interface ILoggingService : IGlobalService
+    public interface ILoggingService : IGlobalService, ILogger
     {
-        ILogger GetRootLogger();
-        ILogger CreateScopedLogger(params string[] names);
-
-        IScopedLogger<TScope> CreateScopedLogger<TScope>(TScope scope) where TScope: class;
-
-        IScopedLogger<TScope> CreateLoggerForScope<TScope>(TScope scope) where TScope: class;
+        void AddListener(Action<LoggingContext, LogMessage> messagesListener);
     }
 }

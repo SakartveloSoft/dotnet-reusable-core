@@ -6,11 +6,13 @@ namespace SakartveloSoft.API.Core.Logging
 {
     public interface ILogger
     {
-        public LoggingPath Path { get; }
+        public LoggingContext Context { get; }
         void Write(LogMessage message);
 
-        ILogger CreateSubLogger(params string[] subNames);
+        ILogger CreateSubLogger(string subName, object properties = null);
 
-        IScopedLogger<TScope> CreateSubLogger<TScope>(TScope scope) where TScope: class;
+        IScopedLogger<TScope> CreateSubLogger<TScope>(string name, TScope scope = null) where TScope : class;
+
+        IScopedLogger<TScope> CreateSubLogger<TScope>(TScope scope = null) where TScope: class;
     }
 }

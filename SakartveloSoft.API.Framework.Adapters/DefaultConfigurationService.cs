@@ -6,7 +6,7 @@ using SakartveloSoft.API.Core.Services;
 
 namespace SakartveloSoft.API.Framework.Adapters
 {
-    internal class DefaultConfigurationService: IConfigurationService
+    internal class DefaultConfigurationService: GlobalServiceBase, IConfigurationService
     {
         private IConfiguration configuration;
         public DefaultConfigurationService(IConfiguration configuration)
@@ -19,9 +19,6 @@ namespace SakartveloSoft.API.Framework.Adapters
         private ConfigurationValuesBag mergedConfiguration;
 
 
-        public IConfigurationReader Configuration { get; set; }
-
-        public bool Ready { get; private set; }
 
         private List<IConfigurationLoader> loaders = new List<IConfigurationLoader>();
 
@@ -30,18 +27,13 @@ namespace SakartveloSoft.API.Framework.Adapters
             loaders.Add(loader);
         }
 
-        public async Task Initialize(IGlobalServicesContext context)
+        protected override async Task PerformInitialization(IGlobalServicesContext context)
         {
-            if (Ready)
-            {
-                return;
-            }
             foreach(var loader in loaders)
             {
                 await loader.LoadValues(mergedConfiguration);
             }
             this.Configuration = mergedConfiguration;
-            Ready = true;
         }
 
     }

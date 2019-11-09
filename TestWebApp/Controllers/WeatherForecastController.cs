@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
+using SakartveloSoft.API.Core.Logging;
 
 namespace TestWebApp.Controllers
 {
@@ -18,9 +19,9 @@ namespace TestWebApp.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IScopedLogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(IScopedLogger<WeatherForecastController> logger)
         {
             _logger = logger;
         }
@@ -41,7 +42,7 @@ namespace TestWebApp.Controllers
         [HttpPost]
         public string Post([FromBody]JsonElement jsonInput)
         {
-            _logger.LogDebug(((Object)jsonInput).ToString());
+            _logger.Debug(((Object)jsonInput).ToString());
             return "OK";
         }
     }

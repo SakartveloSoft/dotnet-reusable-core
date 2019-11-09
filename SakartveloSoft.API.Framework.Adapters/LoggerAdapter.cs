@@ -7,30 +7,39 @@ namespace SakartveloSoft.API.Framework.Adapters
 {
     public class LoggerAdapter: ILogger
     {
-        public LoggingPath Path { get; private set; }
+        public LoggingContext Context { get; private set; }
 
-        private Action<LoggingPath, LogMessage> messagesWriter;
+        private Action<LoggingContext, LogMessage> messagesWriter;
 
-        public LoggerAdapter(LoggingPath path, Action<LoggingPath, LogMessage> messagesWriter)
+        public LoggerAdapter(LoggingContext context, Action<LoggingContext, LogMessage> messagesWriter)
         {
-            Path = path;
+            Context = context;
             this.messagesWriter = messagesWriter;
         }
 
-        public ILogger CreateSubLogger(params string[] subNames)
+        public ILogger CreateSubLogger(string subName)
         {
-            return new LoggerAdapter(Path.Append(subNames), messagesWriter);
+            return new LoggerAdapter(Context.CreateSubContext(subName), messagesWriter);
         }
 
         public IScopedLogger<TScope> CreateSubLogger<TScope>(TScope scope) where TScope : class
         {
-            return new ScopedLoggerAdapter<TScope>(Path, scope, messagesWriter);
+            return new ScopedLoggerAdapter<TScope>(Context.CreateSubContext<TScope>(scope), messagesWriter);
         }
 
         public void Write(LogMessage message)
         {
-            messagesWriter(Path, message);
+            messagesWriter(Context, message);
         }
 
+        public ILogger CreateSubLogger(string subName, object properties = null)
+        {
+            return new LoggerAdapter(Context.CreateSubContext(subName, properties), messagesWriter);
+        }
+
+        public IScopedLogger<TScope> CreateSubLogger<TScope>(string name, TScope scope = null) where TScope : class
+        {
+            return new ScopedLoggerAdapter<TScope>(Context.CreateSubContext(name, scope), messagesWriter);
+        }
     }
 }

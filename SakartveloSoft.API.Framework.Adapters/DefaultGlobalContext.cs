@@ -11,7 +11,7 @@ using SakartveloSoft.API.Core.Logging;
 
 namespace SakartveloSoft.API.Framework.Adapters
 {
-    public class DefaultGlobalContext : IGlobalServicesContext
+    public class DefaultGlobalContext : GlobalServiceBase, IGlobalServicesContext
     {
         public string EnvironmentId { get; set; }
 
@@ -64,21 +64,26 @@ namespace SakartveloSoft.API.Framework.Adapters
             WebRoot = webRootPath;
         }
 
-        public async Task Initialize()
+        protected override async Task PerformInitialization(IGlobalServicesContext context)
         {
             await Get<IConfigurationService>().Initialize(this);
             var conf = Get<IConfigurationService>();
             var log = Get<ILoggingService>();
             log.Configuration = conf.Configuration;
             await log.Initialize(this);
-            foreach(var serviceEntry in globalServices)
+            foreach (var serviceEntry in globalServices)
             {
                 if (!serviceEntry.Value.Ready)
                 {
-                    serviceEntry.Value.Configuration = conf.Configuration; 
+                    serviceEntry.Value.Configuration = conf.Configuration;
                     await serviceEntry.Value.Initialize(this);
                 }
             }
+        }
+
+        public Task Initialize()
+        {
+            return Initialize(this);
         }
 
         public string ContentRoot { get; private set; }

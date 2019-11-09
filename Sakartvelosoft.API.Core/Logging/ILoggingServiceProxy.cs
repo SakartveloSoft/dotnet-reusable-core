@@ -4,8 +4,8 @@ using System.Text;
 
 namespace SakartveloSoft.API.Core.Logging
 {
-    public interface ILoggingScope
+    public interface ILoggingServiceProxy
     {
-        string Name { get; }
+        public ILoggingService AppLoggingService { get; set; }
     }
 }

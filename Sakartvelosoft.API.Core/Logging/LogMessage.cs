@@ -9,9 +9,15 @@ namespace SakartveloSoft.API.Core.Logging
     {
         public string Message { get; set; }
         public LoggingSeverity Severity { get; set; }
+        public DateTime EventTime { get; set; }
         public string OperationName { get; set; }
-        public System.Text.Json.JsonDocument Details { get; set; }
+        public JToken Details { get; set; }
 
-        public JObject FailureDetails { get; set; }
+        public JToken FailureDetails { get; set; }
+
+        public LogMessage()
+        {
+            EventTime = DateTime.UtcNow;
+        }
     }
 }
