@@ -10,20 +10,20 @@ namespace SakartveloSoft.API.Framework.Adapters
 {
     public class DefaultLoggingService : ILoggingService
     {
-        public IConfigurationReader Configuration { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IConfigurationReader Configuration { get; set; }
 
-        public bool Ready => throw new NotImplementedException();
+        public bool Ready { get; private set; }
 
         private ILogger rootLogger;
 
         public ILogger CreateScopedLogger(params string[] names)
         {
-            return new LoggerAdapter(new LoggingPath(names), WriteMessage);
+            return rootLogger.CreateSubLogger(names);
         }
 
-        public ILogger CreateScopedLogger<TScope>(TScope scope) where TScope : ILoggingScope
+        public IScopedLogger<TScope> CreateScopedLogger<TScope>(TScope scope) where TScope : class
         {
-            throw new NotImplementedException();
+            return rootLogger.CreateSubLogger(scope);
         }
 
         public ILogger GetRootLogger()
@@ -38,6 +38,7 @@ namespace SakartveloSoft.API.Framework.Adapters
         public Task Initialize(IGlobalServicesContext context)
         {
             rootLogger = new LoggerAdapter(new LoggingPath(context.ApplicationId, context.EnvironmentId, context.ServiceId), WriteMessage);
+            this.Ready = true;
             return Task.CompletedTask;
         }
 
@@ -46,5 +47,9 @@ namespace SakartveloSoft.API.Framework.Adapters
 
         }
 
+        public IScopedLogger<TScope> CreateLoggerForScope<TScope>(TScope scope) where TScope : class
+        {
+            return new ScopedLoggerAdapter<TScope>(LoggingPath.Empty, scope, WriteMessage);
+        }
     }
 }

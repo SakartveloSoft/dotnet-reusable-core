@@ -22,14 +22,15 @@ namespace SakartveloSoft.API.Framework.Adapters
             return new LoggerAdapter(Path.Append(subNames), messagesWriter);
         }
 
-        public ILogger CreateSubLogger<TScope>(TScope scope) where TScope : ILoggingScope
+        public IScopedLogger<TScope> CreateSubLogger<TScope>(TScope scope) where TScope : class
         {
-            return new LoggerAdapter(Path.Append(scope.Name), messagesWriter);
+            return new ScopedLoggerAdapter<TScope>(Path, scope, messagesWriter);
         }
 
         public void Write(LogMessage message)
         {
             messagesWriter(Path, message);
         }
+
     }
 }

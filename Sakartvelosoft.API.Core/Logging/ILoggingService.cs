@@ -7,9 +7,11 @@ namespace SakartveloSoft.API.Core.Logging
 {
     public interface ILoggingService : IGlobalService
     {
-        public ILogger GetRootLogger();
-        public ILogger CreateScopedLogger(params string[] names);
+        ILogger GetRootLogger();
+        ILogger CreateScopedLogger(params string[] names);
 
-        public ILogger CreateScopedLogger<TScope>(TScope scope) where TScope: ILoggingScope;
+        IScopedLogger<TScope> CreateScopedLogger<TScope>(TScope scope) where TScope: class;
+
+        IScopedLogger<TScope> CreateLoggerForScope<TScope>(TScope scope) where TScope: class;
     }
 }

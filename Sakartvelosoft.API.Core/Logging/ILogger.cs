@@ -11,6 +11,6 @@ namespace SakartveloSoft.API.Core.Logging
 
         ILogger CreateSubLogger(params string[] subNames);
 
-        ILogger CreateSubLogger<TScope>(TScope scope) where TScope: ILoggingScope;
+        IScopedLogger<TScope> CreateSubLogger<TScope>(TScope scope) where TScope: class;
     }
 }

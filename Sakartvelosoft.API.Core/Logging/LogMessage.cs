@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,6 +12,6 @@ namespace SakartveloSoft.API.Core.Logging
         public string OperationName { get; set; }
         public System.Text.Json.JsonDocument Details { get; set; }
 
-        public System.Text.Json.JsonDocument FailureDetails { get; set; }
+        public JObject FailureDetails { get; set; }
     }
 }

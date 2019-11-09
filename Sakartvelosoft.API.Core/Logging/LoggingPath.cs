@@ -10,6 +10,9 @@ namespace SakartveloSoft.API.Core.Logging
 
         private static readonly string Seprator = "/";
 
+        public static LoggingPath Empty { get; } = new LoggingPath();
+
+
         public LoggingPath(params string[] names)
         {
             this._path = names ?? new string[0];

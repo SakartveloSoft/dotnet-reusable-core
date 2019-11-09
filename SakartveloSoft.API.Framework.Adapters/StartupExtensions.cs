@@ -18,9 +18,10 @@ namespace SakartveloSoft.API.Framework.Adapters
             var globalContext = new DefaultGlobalContext(services, configuration);
             services.AddSingleton<IGlobalServicesContext>(globalContext);
             var confService = new DefaultConfigurationService(configuration);
-            services.AddSingleton<IConfigurationService>(confService);
-            services.AddSingleton<ILoggingService>(new DefaultLoggingService());
+            globalContext.AddGlobalService<IConfigurationService>(confService);
+            confService.AddProvider(new EnvVariablesConfigurationLoader());
             services.AddSingleton(confService.Configuration);
+            globalContext.AddGlobalService<ILoggingService>(new DefaultLoggingService());
         }
 
         public static async Task InitializeGlobalServices(this IApplicationBuilder app, IWebHostEnvironment env)
