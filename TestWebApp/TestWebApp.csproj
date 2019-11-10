@@ -22,4 +22,8 @@
     <ProjectReference Include="..\SakartveloSoft.API.Framework.Adapters\SakartveloSoft.API.Framework.Adapters.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Static\js\" />
+  </ItemGroup>
+
 </Project>

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SakartveloSoft.API.Core;
 using SakartveloSoft.API.Core.Configuration;
 using SakartveloSoft.API.Core.Logging;
@@ -16,7 +17,6 @@ namespace SakartveloSoft.API.Framework.Adapters
     {
         public static void AttachGlobalServices(this IServiceCollection services, IConfiguration configuration)
         {
-
             var globalContext = new DefaultGlobalContext(services, configuration);
             services.AddSingleton<IGlobalServicesContext>(globalContext);
             var confService = new DefaultConfigurationService(configuration);
@@ -38,6 +38,33 @@ namespace SakartveloSoft.API.Framework.Adapters
             await globalContext.Initialize();
 
             app.UseAPIContext();
+        }
+
+        public static IWebHostBuilder PrepareLoggingProxy(this IWebHostBuilder hostBuilder)
+        {
+            var minSeverityStr = (Environment.GetEnvironmentVariable("logging:minSeverity") ?? "debugging").Trim().ToLowerInvariant();
+            var minSeverity = LoggingSeverity.Debugging;
+            try
+            {
+                minSeverity = Enum.Parse<LoggingSeverity>(minSeverityStr, true);
+            }
+            catch
+            {
+
+            }
+            var loggingAdapter = new LoggingPlatformAdapter().SetMinSeverity(minSeverity);
+            hostBuilder.ConfigureServices(collection =>
+            {
+                collection.AddSingleton<ILoggingServiceProxy>(loggingAdapter);
+            });
+            hostBuilder.ConfigureLogging(logging =>
+            {
+                logging.ClearProviders();
+                logging.AddFilter("Microsoft", LogLevel.Warning);
+                logging.AddFilter("System", LogLevel.Warning);
+                logging.AddProvider(loggingAdapter);
+            });
+            return hostBuilder;
         }
     }
 }

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sakartvelosoft.API.Core\Sakartvelosoft.API.Core.csproj" />
+    <ProjectReference Include="..\SakartveloSoft.API.Framework.Adapters\SakartveloSoft.API.Framework.Adapters.csproj" />
+  </ItemGroup>
+
+</Project>
