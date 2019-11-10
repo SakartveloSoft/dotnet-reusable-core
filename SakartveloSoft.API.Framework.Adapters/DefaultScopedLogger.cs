@@ -1,4 +1,5 @@
-﻿using SakartveloSoft.API.Core.Logging;
+﻿using SakartveloSoft.API.Core;
+using SakartveloSoft.API.Core.Logging;
 
 namespace SakartveloSoft.API.Framework.Adapters
 {
@@ -7,11 +8,10 @@ namespace SakartveloSoft.API.Framework.Adapters
         private readonly ILoggingService logService;
         private readonly LoggingContext context;
 
-        public DefaultScopedLogger(ILoggingService logService, Microsoft.AspNetCore.Http.HttpContext httpContext, T scope = null)
+        public DefaultScopedLogger(ILoggingService logService, IAPIContext apiContext)
         {
             this.logService = logService;
-            this.Scope = scope;
-            this.impl = logService.CreateSubLogger(scope);
+            this.impl = logService.CreateSubLogger(apiContext).CreateSubLogger<T>();
             this.context = impl.Context;
 
         }

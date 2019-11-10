@@ -14,5 +14,10 @@ namespace SakartveloSoft.API.Core.Logging
             Name = name;
             Value = value == null ? "null" : value.ToString();
         }
+
+        public override string ToString()
+        {
+            return $@"{Name}={Value ?? "null"}";
+        }
     }
 }

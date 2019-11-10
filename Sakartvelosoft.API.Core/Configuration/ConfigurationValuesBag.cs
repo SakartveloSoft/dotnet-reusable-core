@@ -1,10 +1,11 @@
-﻿using System;
+﻿using SakartveloSoft.API.Core.Logging;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SakartveloSoft.API.Core.Configuration
 {
-    public class ConfigurationValuesBag : Dictionary<string, ConfigurationValue>, IConfigurationReader
+    public class ConfigurationValuesBag : Dictionary<string, ConfigurationValue>, IConfigurationReader, IExcludedFromLogging
     {
 
 

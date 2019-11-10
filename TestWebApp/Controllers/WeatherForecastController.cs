@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
+using SakartveloSoft.API.Core;
 using SakartveloSoft.API.Core.Logging;
 
 namespace TestWebApp.Controllers
@@ -20,10 +21,12 @@ namespace TestWebApp.Controllers
         };
 
         private readonly IScopedLogger<WeatherForecastController> _logger;
+        private readonly IAPIContext _apiContext;
 
-        public WeatherForecastController(IScopedLogger<WeatherForecastController> logger)
+        public WeatherForecastController(IScopedLogger<WeatherForecastController> logger, IAPIContext apiContext)
         {
             _logger = logger;
+            _apiContext = apiContext;
         }
 
         [HttpGet]

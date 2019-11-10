@@ -29,6 +29,7 @@ namespace TestWebApp
         {
             services.AttachGlobalServices(Configuration);
             services.AddControllers();
+            services.AddDataProtection();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

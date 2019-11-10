@@ -8,7 +8,8 @@ namespace SakartveloSoft.API.Core.Logging
 {
     public class LoggingContext
     {
-        private List<string> componentsPath = new List<string>();
+        private readonly LoggingContext parentContext;
+        private readonly List<string> componentsPath = new List<string>();
         public IReadOnlyList<string> ComponentsPath => componentsPath;
 
         public string ComponentName { get; private set; }
@@ -55,28 +56,45 @@ namespace SakartveloSoft.API.Core.Logging
                 componentsPath.Add(componentName);
                 ComponentName = componentName;
             }
+            UpdateProperties(properties);
+        }
+
+        public void UpdateProperties(object properties)
+        {
             if (properties != null)
             {
                 var propType = properties.GetType();
                 if (propType.IsClass)
                 {
-                    foreach(var prop in propType.GetProperties(BindingFlags.Public | BindingFlags.Instance)) {
+                    foreach (var prop in propType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                    {
                         if (prop.CanRead)
                         {
-                            this.propertiesBag[prop.Name] = prop.GetGetMethod().Invoke(properties, null);
+                            var value = prop.GetGetMethod().Invoke(properties, null);
+                            if (value == null || value is IExcludedFromLogging)
+                            {
+                                continue;
+                            }
+                            this.propertiesBag[prop.Name] = value;
                         }
                     }
-                    foreach(var field in propType.GetFields(BindingFlags.Public | BindingFlags.Instance))
+                    foreach (var field in propType.GetFields(BindingFlags.Public | BindingFlags.Instance))
                     {
+                        var fieldVal = field.GetValue(properties);
+                        if (fieldVal == null || fieldVal is IExcludedFromLogging)
+                        {
+                            continue;
+                        }
                         this.propertiesBag[field.Name] = field.GetValue(properties);
                     }
-                } 
+                }
                 else
                 {
-                    this.propertiesBag["Context"] = properties.ToString(); 
+                    this.propertiesBag["Context"] = properties.ToString();
                 }
 
             }
+            formattedValuesList = null;
         }
 
         public static LoggingContext Empty { get; } = new LoggingContext(null, null, null);
@@ -91,9 +109,9 @@ namespace SakartveloSoft.API.Core.Logging
             return new LoggingContext<TScope>(this, name, subScope);
         }
 
-        public LoggingContext<TScope> CreateSubContext<TScope>([NotNull]TScope scope)
+        public LoggingContext<TScope> CreateSubContext<TScope>(TScope scope = default) where TScope: class
         {
-            return new LoggingContext<TScope>(this, scope.ToString(), scope);
+            return new LoggingContext<TScope>(this, scope == null ? (typeof(TScope).Name) : scope.ToString(), scope);
         }
     }
 
