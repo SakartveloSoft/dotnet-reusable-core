@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Cloud.Datastore.V1" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sakartvelosoft.API.Core\Sakartvelosoft.API.Core.csproj" />
+    <ProjectReference Include="..\SakartveloSoft.API.DataAttributes\SakartveloSoft.API.DataAttributes.csproj" />
+    <ProjectReference Include="..\SakartveloSoft.API.Metadata\SakartveloSoft.API.Metadata.csproj" />
+    <ProjectReference Include="..\SakartveloSoft.API.ValidationAttributes\SakartveloSoft.API.ValidationAttributes.csproj" />
+  </ItemGroup>
+
+</Project>

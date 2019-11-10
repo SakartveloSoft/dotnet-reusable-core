@@ -26,6 +26,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakartveloSoft.API.Framewor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakartveloSoft.Framework.TetsWebAppAuth", "SakartveloSoft.Framework.TetsWebAppAuth\SakartveloSoft.Framework.TetsWebAppAuth.csproj", "{0AA8E6CC-CAA2-4325-8FD2-E6307D4B31A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakartveloSoft.Framework.Configurator", "SakartveloSoft.Framework.Configurator\SakartveloSoft.Framework.Configurator.csproj", "{AB391277-9489-4114-91A4-AEFC3BD4C919}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakartveloSoft.API.DatastoreAdaprers", "SakartveloSoft.API.DatastoreAdaprers\SakartveloSoft.API.DatastoreAdaprers.csproj", "{0CD4BF68-E30A-4489-B2E2-1FE198B1502F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +72,14 @@ Global
 		{0AA8E6CC-CAA2-4325-8FD2-E6307D4B31A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AA8E6CC-CAA2-4325-8FD2-E6307D4B31A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AA8E6CC-CAA2-4325-8FD2-E6307D4B31A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB391277-9489-4114-91A4-AEFC3BD4C919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB391277-9489-4114-91A4-AEFC3BD4C919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB391277-9489-4114-91A4-AEFC3BD4C919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB391277-9489-4114-91A4-AEFC3BD4C919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CD4BF68-E30A-4489-B2E2-1FE198B1502F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CD4BF68-E30A-4489-B2E2-1FE198B1502F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CD4BF68-E30A-4489-B2E2-1FE198B1502F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CD4BF68-E30A-4489-B2E2-1FE198B1502F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
