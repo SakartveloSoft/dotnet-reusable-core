@@ -8,6 +8,8 @@ using SakartveloSoft.API.Core;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Http;
 using SakartveloSoft.API.Core.Logging;
+using SakartveloSoft.API.Metadata;
+using System.Text;
 
 namespace SakartveloSoft.API.Framework.Adapters
 {
@@ -62,7 +64,7 @@ namespace SakartveloSoft.API.Framework.Adapters
                         apiCtx.StatusCode = 404;
                         apiCtx.ProcessingCompletedAt = DateTime.UtcNow;
                         apiCtx.TimeSpent = apiCtx.ProcessingCompletedAt - apiCtx.StartTime;
-                        logger.Error($@"{apiCtx.RequestMethod} to {apiCtx.RequestUrl} failed to process at all in {apiCtx.TimeSpent} with status {apiCtx.StatusCode} returning {apiCtx.ResponseContentType}");
+                        logger.Error($@"{apiCtx.RequestMethod} to {apiCtx.RequestUrl} as unknown route in {apiCtx.TimeSpent} with status {apiCtx.StatusCode} returning {apiCtx.ResponseContentType}");
                     }
                     else if (apiCtx.StatusCode < 400)
                     {
@@ -93,10 +95,17 @@ namespace SakartveloSoft.API.Framework.Adapters
 
         private static string GenerateRequestId()
         {
-            var bytes = new byte[16];
+            var bytes = new byte[24];
             rng.GetBytes(bytes);
-            var str = Convert.ToBase64String(bytes);
-            return str.Replace('/', '_').Replace('+', '-');
+            var span = bytes.AsSpan();
+            var buf = new StringBuilder(36);
+            var u1 = BitConverter.ToUInt64(span.Slice(0, 8));
+            var u2 = BitConverter.ToUInt64(span.Slice(8, 8));
+            var u3 = BitConverter.ToUInt64(span.Slice(16, 8));
+            Base36.ToBase62(u1, buf);
+            Base36.ToBase62(u2, buf);
+            Base36.ToBase62(u3, buf);
+            return buf.ToString();
         }
 
     }

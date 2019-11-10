@@ -28,5 +28,10 @@ namespace SakartveloSoft.API.Framework.Adapters
         public DateTime? ProcessingCompletedAt { get; set; }
         public TimeSpan? TimeSpent { get; set; }
         string IAPIContext.RequestMethod { get; set; }
+
+        public override string ToString()
+        {
+            return "API Request Context";
+        }
     }
 }
