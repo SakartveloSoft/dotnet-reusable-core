@@ -78,15 +78,11 @@ namespace SakartveloSoft.API.Framework.Adapters
                     {
                         logger.Error($@"{apiCtx.RequestMethod} to {apiCtx.RequestUrl} encountered a problem in {apiCtx.TimeSpent} with status {apiCtx.StatusCode} returning {apiCtx.ResponseContentType}");
                     }
-                } catch
+                } catch(Exception ex)
                 {
-                    if (apiCtx.StatusCode == 0)
-                    {
-                        apiCtx.StatusCode = 404;
-                    }
                     apiCtx.ProcessingCompletedAt = DateTime.UtcNow;
                     apiCtx.TimeSpent = apiCtx.ProcessingCompletedAt - apiCtx.StartTime;
-                    logger.Error($@"{apiCtx.RequestMethod} to {apiCtx.RequestUrl} failed to process at all in {apiCtx.TimeSpent} with status {apiCtx.StatusCode} returning {apiCtx.ResponseContentType}");
+                    logger.Error($@"{apiCtx.RequestMethod} to {apiCtx.RequestUrl} failed to process at all in {apiCtx.TimeSpent} with error {ex.Message} status {apiCtx.StatusCode} returning {apiCtx.ResponseContentType}");
                     throw;
                 }
             });

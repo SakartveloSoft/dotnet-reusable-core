@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -7,9 +8,12 @@ using SakartveloSoft.API.Core;
 using SakartveloSoft.API.Core.Configuration;
 using SakartveloSoft.API.Core.Logging;
 using SakartveloSoft.API.Core.Services;
+using SakartveloSoft.API.Framework.Adapters.Security;
 using System;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SakartveloSoft.API.Framework.Adapters
 {
@@ -37,7 +41,9 @@ namespace SakartveloSoft.API.Framework.Adapters
             globalContext.UpdateGlobalOptions(env.ApplicationName, env.EnvironmentName, env.WebRootPath, env.ContentRootPath);
             await globalContext.Initialize();
 
+
             app.UseAPIContext();
+
         }
 
         public static IWebHostBuilder PrepareLoggingProxy(this IWebHostBuilder hostBuilder)
@@ -65,6 +71,35 @@ namespace SakartveloSoft.API.Framework.Adapters
                 logging.AddProvider(loggingAdapter);
             });
             return hostBuilder;
+        }
+
+
+        public static void AddSecurityServices(this IServiceCollection services, IConfiguration config)
+        {
+            var securityOptions = config.Get<ApplicationSecurityOptions>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddRoleStore<DefaultRoleStore>()
+                .AddUserStore<DefaultUserStore>();
+            services.AddAuthentication(authptions =>
+            {
+                authptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                authptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(tokenOptions =>
+                {
+                    tokenOptions.RequireHttpsMetadata = true;
+                    tokenOptions.SaveToken = true;
+                    tokenOptions.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ClockSkew = TimeSpan.FromMinutes(1),
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(securityOptions.APITokensKey)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                })
+                .AddIdentityCookies();
+
         }
     }
 }
