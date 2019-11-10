@@ -29,6 +29,7 @@ namespace TestWebApp
         {
             services.AttachGlobalServices(Configuration);
             services.AddControllers();
+            services.AddRazorPages();
             services.AddDataProtection();
         }
 
@@ -47,9 +48,11 @@ namespace TestWebApp
 
             app.UseAuthorization();
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
 
         }
