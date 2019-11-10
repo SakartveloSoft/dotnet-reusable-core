@@ -14,6 +14,7 @@ namespace SakartveloSoft.API.Core.Configuration
         DateTime,
         TimeSpan,
         Json,
-        Object
+        Object,
+        Bytes
     }
 }

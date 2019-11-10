@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Text.Json;
@@ -17,6 +18,7 @@ namespace SakartveloSoft.API.Core.Configuration
         public TimeSpan TimeSpan { get; private set; }
         public object Value { get; private set; }
         public dynamic DynamicValue { get; private set; }
+        public byte[] BytesValue { get; private set; }
 
         public static readonly ConfigurationValue NullValue = new ConfigurationValue
         {
@@ -73,7 +75,38 @@ namespace SakartveloSoft.API.Core.Configuration
                 ValueType = typeof(bool)
             };
         }
-        public static ConfigurationValue FromObject<T>(T value) where T : class, new()
+
+        public static implicit operator ConfigurationValue(DateTime value)
+        {
+            return new ConfigurationValue
+            {
+                Type = ConfigurationValueType.DateTime,
+                DateTime = value,
+                BooleanValue = value.Ticks != 0,
+                DoubleValue = value.Ticks,
+                Value = value,
+                DynamicValue = value,
+                StringValue = value.ToString("yyyy-MM-ddThh:mm:ss.fffZ"),
+            };
+        }
+
+        public static implicit operator ConfigurationValue(byte[] bytes)
+        {
+            if (bytes == null)
+            {
+                return NullValue;
+            }
+            return new ConfigurationValue
+            {
+                Type = ConfigurationValueType.Bytes,
+                StringValue = Convert.ToBase64String(bytes),
+                Value = bytes,
+                DynamicValue = bytes,
+                BytesValue = bytes,
+            };
+        }
+
+        public static ConfigurationValue FromObject<T>(T value) where T : class
         {
             var jsonValue = JsonSerializer.Serialize<T>(value);
             return new ConfigurationValue
@@ -136,6 +169,19 @@ namespace SakartveloSoft.API.Core.Configuration
             }
 
         }
+
+        public static ConfigurationValue FromJSON(JToken token)
+        {
+            var jsDoc = MakeDynamicFromJSON(token.ToString());
+            return new ConfigurationValue
+            {
+                Type = ConfigurationValueType.Json,
+                StringValue = token.ToString(),
+                Value = jsDoc,
+                DynamicValue = jsDoc
+            };
+        }
+
         public static ConfigurationValue FromJSON(string jsonLiteral)
         {
             dynamic jsDoc = MakeDynamicFromJSON(jsonLiteral);
