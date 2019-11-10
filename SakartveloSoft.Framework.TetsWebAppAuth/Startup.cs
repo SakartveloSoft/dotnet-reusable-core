@@ -25,6 +25,8 @@ namespace SakartveloSoft.Framework.TetsWebAppAuth
         public void ConfigureServices(IServiceCollection services)
         {
             services.AttachGlobalServices(Configuration);
+            services.AddSecurityServices(Configuration);
+
             services.AddControllersWithViews();
         }
 
@@ -34,16 +36,20 @@ namespace SakartveloSoft.Framework.TetsWebAppAuth
             await app.InitializeGlobalServices(env);
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler("/Error/500");
+                //app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Error/500");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
 
             app.UseRouting();
 

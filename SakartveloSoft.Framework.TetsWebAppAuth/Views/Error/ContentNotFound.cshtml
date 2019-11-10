@@ -1,0 +1,27 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+    Layout = "_ErrorPageLayout";
+}
+
+<h1 class="text-danger">Page not found.</h1>
+<p>
+    Possible causes are:
+    <ul>
+        <li>There is a typo in the URL</li>
+        <li>Page you was looking for does not exists</li>
+    </ul>
+</p>
+
+<p>
+    <strong>Page</strong>
+    @Model.RequestUrl
+</p>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+
