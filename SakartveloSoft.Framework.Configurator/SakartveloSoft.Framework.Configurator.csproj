@@ -6,7 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.6.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Sakartvelosoft.API.Core\Sakartvelosoft.API.Core.csproj" />
+    <ProjectReference Include="..\SakartveloSoft.Configuration.CosmosDB\SakartveloSoft.Configuration.CosmosDB.csproj" />
   </ItemGroup>
 
 </Project>

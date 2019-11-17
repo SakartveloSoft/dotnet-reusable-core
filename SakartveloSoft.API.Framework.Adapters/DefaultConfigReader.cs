@@ -19,9 +19,9 @@ namespace SakartveloSoft.API.Framework.Adapters
         {
             get
             {
-                if (values.TryGetValue(name, out ConfigurationValue val))
+                if (values.TryGetValue(name, out IConfigurationEntry val))
                 {
-                    return val.StringValue;
+                    return (val.Value ?? ConfigurationValue.NullValue).StringValue;
                 }
                 return "";
             }
@@ -29,9 +29,9 @@ namespace SakartveloSoft.API.Framework.Adapters
 
         public T Get<T>(string name, T fallback = default)
         {
-            if (this.values.TryGetValue(name, out ConfigurationValue val))
+            if (this.values.TryGetValue(name, out IConfigurationEntry val))
             {
-                return val.Value == null ? fallback : (T)val.Value;
+                return (T)((val.Value ?? ConfigurationValue.NullValue).Value ?? fallback);
             } else
             {
                 return fallback;
@@ -40,9 +40,9 @@ namespace SakartveloSoft.API.Framework.Adapters
 
         public bool GetBoolean(string name, bool fallback = false)
         {
-            if (values.TryGetValue(name, out ConfigurationValue val))
+            if (values.TryGetValue(name, out IConfigurationEntry val))
             {
-                return val.BooleanValue;
+                return (val.Value ?? ConfigurationValue.NullValue).BooleanValue;
             } else
             {
                 return fallback;
@@ -51,9 +51,9 @@ namespace SakartveloSoft.API.Framework.Adapters
 
         public DateTime? GetDateTime(string name, DateTime? fallback = null)
         {
-            if (values.TryGetValue(name, out ConfigurationValue dt))
+            if (values.TryGetValue(name, out IConfigurationEntry dt))
             {
-                return dt.DateTime;
+                return (dt.Value ?? ConfigurationValue.NullValue).DateTime;
             } else
             {
                 return fallback;
@@ -62,9 +62,9 @@ namespace SakartveloSoft.API.Framework.Adapters
 
         public double GetDouble(string name, double fallback = 0)
         {
-            if (values.TryGetValue(name, out ConfigurationValue val))
+            if (values.TryGetValue(name, out IConfigurationEntry val))
             {
-                return val.DoubleValue;
+                return (val.Value ?? ConfigurationValue.NullValue).DoubleValue;
             } else
             {
                 return fallback;
@@ -73,9 +73,9 @@ namespace SakartveloSoft.API.Framework.Adapters
 
         public int GetInteger(string name, int fallback = 0)
         {
-            if (values.TryGetValue(name, out ConfigurationValue val))
+            if (values.TryGetValue(name, out IConfigurationEntry val))
             {
-                return val.IntegerValue;
+                return (val.Value ?? ConfigurationValue.NullValue).IntegerValue;
             } else
             {
                 return fallback;
@@ -84,9 +84,9 @@ namespace SakartveloSoft.API.Framework.Adapters
 
         public object GetValue(string name, object fallback)
         {
-            if (values.TryGetValue(name, out ConfigurationValue val))
+            if (values.TryGetValue(name, out IConfigurationEntry val))
             {
-                return val.Value;
+                return (val.Value ?? ConfigurationValue.NullValue).Value ?? fallback;
             } else
             {
                 return fallback;

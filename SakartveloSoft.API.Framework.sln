@@ -24,11 +24,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebApp", "TestWebApp\Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakartveloSoft.API.Framework.Adapters", "SakartveloSoft.API.Framework.Adapters\SakartveloSoft.API.Framework.Adapters.csproj", "{A65B8BCC-1A9C-446D-8503-5E1BB56474A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakartveloSoft.Framework.TetsWebAppAuth", "SakartveloSoft.Framework.TetsWebAppAuth\SakartveloSoft.Framework.TetsWebAppAuth.csproj", "{0AA8E6CC-CAA2-4325-8FD2-E6307D4B31A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakartveloSoft.Framework.TetsWebAppAuth", "SakartveloSoft.Framework.TetsWebAppAuth\SakartveloSoft.Framework.TetsWebAppAuth.csproj", "{0AA8E6CC-CAA2-4325-8FD2-E6307D4B31A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakartveloSoft.Framework.Configurator", "SakartveloSoft.Framework.Configurator\SakartveloSoft.Framework.Configurator.csproj", "{AB391277-9489-4114-91A4-AEFC3BD4C919}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakartveloSoft.Framework.Configurator", "SakartveloSoft.Framework.Configurator\SakartveloSoft.Framework.Configurator.csproj", "{AB391277-9489-4114-91A4-AEFC3BD4C919}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakartveloSoft.API.DatastoreAdaprers", "SakartveloSoft.API.DatastoreAdaprers\SakartveloSoft.API.DatastoreAdaprers.csproj", "{0CD4BF68-E30A-4489-B2E2-1FE198B1502F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakartveloSoft.API.DatastoreAdaprers", "SakartveloSoft.API.DatastoreAdaprers\SakartveloSoft.API.DatastoreAdaprers.csproj", "{0CD4BF68-E30A-4489-B2E2-1FE198B1502F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakartveloSoft.Configuration.CosmosDB", "SakartveloSoft.Configuration.CosmosDB\SakartveloSoft.Configuration.CosmosDB.csproj", "{74BFAF2F-04DA-404F-9BEF-4DEEB3D59DA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,6 +82,10 @@ Global
 		{0CD4BF68-E30A-4489-B2E2-1FE198B1502F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CD4BF68-E30A-4489-B2E2-1FE198B1502F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CD4BF68-E30A-4489-B2E2-1FE198B1502F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74BFAF2F-04DA-404F-9BEF-4DEEB3D59DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74BFAF2F-04DA-404F-9BEF-4DEEB3D59DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74BFAF2F-04DA-404F-9BEF-4DEEB3D59DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74BFAF2F-04DA-404F-9BEF-4DEEB3D59DA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

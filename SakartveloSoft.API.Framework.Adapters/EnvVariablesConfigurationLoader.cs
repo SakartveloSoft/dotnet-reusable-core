@@ -10,11 +10,21 @@ namespace SakartveloSoft.API.Framework.Adapters
     {
         public string Name => "Environment Variables";
 
-        public Task LoadValues(IDictionary<string, ConfigurationValue> values, bool forClient = false)
+        public Task LoadValues(IDictionary<string, IConfigurationEntry> values, bool forClient = false)
         {
             foreach(var env in Environment.GetEnvironmentVariables().Keys)
             {
-                values[env.ToString()] = Environment.GetEnvironmentVariable(env.ToString()).ToString();
+                values[env.ToString()] = new ConfigurationEntry
+                {
+                    Path = env.ToString(),
+                    ValueType = ConfigurationValueType.String,
+                    ValueMeaning =
+                    ConfigurationValueMeaning.String,
+                    VisibleToPages = false,
+                    Label = env.ToString(),
+                    Component = null,
+                    Value = Environment.GetEnvironmentVariable(env.ToString()).ToString()
+                };
             }
             return Task.CompletedTask;
         }

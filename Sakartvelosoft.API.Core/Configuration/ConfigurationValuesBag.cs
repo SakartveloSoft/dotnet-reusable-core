@@ -5,16 +5,16 @@ using System.Text;
 
 namespace SakartveloSoft.API.Core.Configuration
 {
-    public class ConfigurationValuesBag : Dictionary<string, ConfigurationValue>, IConfigurationReader, IExcludedFromLogging
+    public class ConfigurationValuesBag : Dictionary<string, IConfigurationEntry>, IConfigurationReader, IExcludedFromLogging
     {
 
 
         string IConfigurationReader.this[string name]
         {
             get {
-                if (TryGetValue(name, out ConfigurationValue val))
+                if (TryGetValue(name, out IConfigurationEntry val))
                 {
-                    return val.StringValue;
+                    return (val.Value ?? ConfigurationValue.NullValue).StringValue;
                 }
                 return "";
             }
@@ -22,9 +22,10 @@ namespace SakartveloSoft.API.Core.Configuration
 
         public T Get<T>(string name, T fallback = default)
         {
-            if (TryGetValue(name, out ConfigurationValue val))
+            if (TryGetValue(name, out IConfigurationEntry val))
             {
-                return val.Value == null ? fallback : (T)val.Value;
+                var confValue = (val.Value ?? ConfigurationValue.NullValue).Value;
+                return confValue ==  null ? fallback : (T)confValue;
             }
             else
             {
@@ -34,9 +35,10 @@ namespace SakartveloSoft.API.Core.Configuration
 
         public bool GetBoolean(string name, bool fallback = false)
         {
-            if (TryGetValue(name, out ConfigurationValue val))
+            if (TryGetValue(name, out IConfigurationEntry val))
             {
-                return val.BooleanValue;
+                var confValue = (val.Value ?? ConfigurationValue.NullValue);
+                return confValue.BooleanValue;
             }
             else
             {
@@ -46,9 +48,9 @@ namespace SakartveloSoft.API.Core.Configuration
 
         public DateTime? GetDateTime(string name, DateTime? fallback = null)
         {
-            if (TryGetValue(name, out ConfigurationValue dt))
+            if (TryGetValue(name, out IConfigurationEntry dt))
             {
-                return dt.DateTime;
+                return (dt.Value ?? ConfigurationValue.NullValue).DateTime;
             }
             else
             {
@@ -58,9 +60,9 @@ namespace SakartveloSoft.API.Core.Configuration
 
         public double GetDouble(string name, double fallback = 0)
         {
-            if (TryGetValue(name, out ConfigurationValue val))
+            if (TryGetValue(name, out IConfigurationEntry val))
             {
-                return val.DoubleValue;
+                return (val.Value ?? ConfigurationValue.NullValue).DoubleValue;
             }
             else
             {
@@ -70,9 +72,9 @@ namespace SakartveloSoft.API.Core.Configuration
 
         public int GetInteger(string name, int fallback = 0)
         {
-            if (TryGetValue(name, out ConfigurationValue val))
+            if (TryGetValue(name, out IConfigurationEntry val))
             {
-                return val.IntegerValue;
+                return (val.Value ?? ConfigurationValue.NullValue).IntegerValue;
             }
             else
             {
@@ -82,9 +84,9 @@ namespace SakartveloSoft.API.Core.Configuration
 
         public object GetValue(string name, object fallback)
         {
-            if (TryGetValue(name, out ConfigurationValue val))
+            if (TryGetValue(name, out IConfigurationEntry val))
             {
-                return val.Value;
+                return (val.Value ?? ConfigurationValue.NullValue).Value;
             }
             else
             {
