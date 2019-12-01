@@ -81,12 +81,27 @@ namespace SakartveloSoft.API.Core.Configuration
             return new ConfigurationValue
             {
                 Type = ConfigurationValueType.DateTime,
+                ValueType = typeof(DateTime),
                 DateTime = value,
                 BooleanValue = value.Ticks != 0,
                 DoubleValue = value.Ticks,
                 Value = value,
                 DynamicValue = value,
                 StringValue = value.ToString("yyyy-MM-ddThh:mm:ss.fffZ"),
+            };
+        }
+
+        public static implicit operator ConfigurationValue(TimeSpan value)
+        {
+            return new ConfigurationValue
+            {
+                Type = ConfigurationValueType.TimeSpan,
+                TimeSpan = value,
+                StringValue = value.ToString(),
+                Value = value,
+                DynamicValue = value,
+                BooleanValue = value != TimeSpan.Zero,
+                ValueType = typeof(TimeSpan)
             };
         }
 

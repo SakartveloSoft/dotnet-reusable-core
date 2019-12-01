@@ -17,6 +17,7 @@ namespace SakartveloSoft.API.Core.Filtering
         {
             this.Operation = op;
             this.operands = args.ToList();
+            this.NodeType = FilterNodeType.DynamicLogicOp;
         }
 
         public MultOperandsBooleanOperation(LogicalOperator op, params ComparationOperand<bool>[] args)

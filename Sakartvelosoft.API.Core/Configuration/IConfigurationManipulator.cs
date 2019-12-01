@@ -7,9 +7,9 @@ namespace SakartveloSoft.API.Core.Configuration
 {
     public interface IConfigurationManipulator
     {
-        public Task<IReadOnlyList<IConfigurationEntry>> GetEntries(string component, string pathPrefix, bool? forPages);
-        public Task<IConfigurationEntry> GetEntry(string component, string path);
-        public Task<IConfigurationEntry> EnsureForEntry(string component, string path, ConfigurationValue value, ConfigurationValueMeaning? meaning, string label, bool? clientVisibility);
-        public Task<bool> DeleteEntry(string component, string path);
+        public Task<IReadOnlyList<IConfigurationEntry>> GetEntries(string component, ConfigurationPath pathPrefix, bool forPages = false, bool recursive = true);
+        public Task<IConfigurationEntry> GetEntry(string component, ConfigurationPath path);
+        public Task<IConfigurationEntry> EnsureForEntry(string component, ConfigurationPath path, ConfigurationValue value = null, ConfigurationValueMeaning? meaning = null, string label = null, bool? visibleForPages = null);
+        public Task<bool> DeleteEntry(string component, ConfigurationPath path);
     }
 }

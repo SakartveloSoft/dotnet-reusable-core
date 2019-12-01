@@ -18,6 +18,7 @@
     <ProjectReference Include="..\SakartveloSoft.API.DataAttributes\SakartveloSoft.API.DataAttributes.csproj" />
     <ProjectReference Include="..\SakartveloSoft.API.Metadata\SakartveloSoft.API.Metadata.csproj" />
     <ProjectReference Include="..\SakartveloSoft.API.ValidationAttributes\SakartveloSoft.API.ValidationAttributes.csproj" />
+    <ProjectReference Include="..\SakartveloSoft.Configuration.CosmosDB\SakartveloSoft.Configuration.CosmosDB.csproj" />
   </ItemGroup>
 
 </Project>

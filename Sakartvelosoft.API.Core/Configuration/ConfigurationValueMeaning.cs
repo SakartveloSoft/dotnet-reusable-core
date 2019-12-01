@@ -13,6 +13,7 @@ namespace SakartveloSoft.API.Core.Configuration
         EmailAddress,
         Date,
         Integer,
+        Float,
         Flag,
         Choice,
         Bytes

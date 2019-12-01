@@ -8,7 +8,7 @@ namespace SakartveloSoft.API.Core.Configuration
     {
         public bool ComponentIsRoot { get; }
         public string Component { get; }
-        public string Path { get; }
+        public ConfigurationPath Path { get; }
         public ConfigurationValueType ValueType { get; }
         public ConfigurationValueMeaning ValueMeaning { get; }
         public ConfigurationValue Value { get; }

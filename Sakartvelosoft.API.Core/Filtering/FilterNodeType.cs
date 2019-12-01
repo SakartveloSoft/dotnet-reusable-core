@@ -13,6 +13,7 @@ namespace SakartveloSoft.API.Core.Filtering
         Value,
         Property,
         Parameter,
-        ValueInList
+        ValueInList,
+        DynamicLogicOp
     }
 }

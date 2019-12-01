@@ -12,7 +12,7 @@ namespace SakartveloSoft.API.Core.Configuration
                 return string.IsNullOrWhiteSpace(Component);
             } 
         }
-        public string Path { get; set; }
+        public ConfigurationPath Path { get; set; }
         public string Label { get; set; }
         public bool VisibleToPages { get; set; }
         public ConfigurationValueMeaning ValueMeaning { get; set; } 

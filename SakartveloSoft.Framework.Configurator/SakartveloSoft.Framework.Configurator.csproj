@@ -18,4 +18,10 @@
     <ProjectReference Include="..\SakartveloSoft.Configuration.CosmosDB\SakartveloSoft.Configuration.CosmosDB.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appSettings_local.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

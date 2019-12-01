@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "SakartveloSoft.Framework.Configurator": {
+      "commandName": "Project",
+      "commandLineArgs": "set test string test1234",
+      "environmentVariables": {
+        "environment_id": "local"
+      }
+    }
+  }
+}
