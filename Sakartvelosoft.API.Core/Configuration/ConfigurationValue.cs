@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using SakartveloSoft.API.Core.Encryption;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -206,6 +207,17 @@ namespace SakartveloSoft.API.Core.Configuration
                 StringValue = jsonLiteral,
                 DynamicValue = jsDoc,
                 Value = jsDoc
+            };
+        }
+
+        public static ConfigurationValue FromKey(IKeyPair keyPair)
+        {
+            var bytes = keyPair.AsBinaryData();
+            return new ConfigurationValue
+            {
+                Type = ConfigurationValueType.Bytes,
+                BytesValue = bytes,
+                Value = bytes
             };
         }
     }

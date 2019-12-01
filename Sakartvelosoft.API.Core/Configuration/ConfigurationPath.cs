@@ -27,7 +27,7 @@ namespace SakartveloSoft.API.Core.Configuration
             }
             else
             {
-                this.Names = literal.ToLower().Split().Select(str => str.Trim()).Where(a => a.Length >= 0).ToArray();
+                this.Names = literal.ToLower().Split(separators).Select(str => str.Trim()).Where(a => a.Length > 0).ToArray();
             }
         }
 

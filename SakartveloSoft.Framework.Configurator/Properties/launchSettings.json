@@ -2,7 +2,7 @@
   "profiles": {
     "SakartveloSoft.Framework.Configurator": {
       "commandName": "Project",
-      "commandLineArgs": "set test string test1234",
+      "commandLineArgs": "list / --recursive",
       "environmentVariables": {
         "environment_id": "local"
       }

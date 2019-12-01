@@ -80,10 +80,10 @@ namespace SakartveloSoft.Framework.Configurator
             IEnumerable<string> result;
             if (Recursive)
             {
-                result = subNodes.Select(entry => entry.Path.ToString());
+                result = subNodes.Select(entry => $@"{entry.Path} is {entry.ValueMeaning} as {entry.ValueType}");
             } else
             {
-                result = subNodes.Select(entry => entry.Path.Leaf);
+                result = subNodes.Select(entry => $@"{entry.Path.Leaf} is {entry.ValueMeaning} as {entry.ValueType}");
             }
             foreach(var name in result)
             {
@@ -197,5 +197,19 @@ namespace SakartveloSoft.Framework.Configurator
         }
     }
 
+    [Verb("new-key", HelpText = "Generates new private and public keys pair")]
+    public class ConfigurationNewKeyCommand: ConfigurationCommand
+    {
+        [Option(HelpText = "Label for key property", SetName ="LABEL_TEXT")]
+        public string Label { get; set; }
+        public override async Task<int> DoIt()
+        {
+            var manipulator = await GetConfigurationManipulator();
+            var keyPair = SakartveloSoft.API.Core.Encryption.EncryptionKeysManager.Default.GenerateNewKeyPair();
+            var entry = await manipulator.EnsureForEntry(Component, ConfigurationPath, ConfigurationValue.FromKey(keyPair), ConfigurationValueMeaning.KeyPair, Label, false);
+            Console.WriteLine($@"Generated new keypair for {entry.Component} component at {entry.Path.ToString()} path\r\n{Convert.ToBase64String(entry.Value.BytesValue)}");
+            return 0;
+        }
+    }
 
 }

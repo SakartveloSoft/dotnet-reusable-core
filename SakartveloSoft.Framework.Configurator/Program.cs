@@ -9,12 +9,13 @@ namespace SakartveloSoft.Framework.Configurator
     {
         static void Main(string[] args)
         {
-            var parseResult = Parser.Default.ParseArguments<ConfigurationListCommand, ConfigurationGetCommand, ConfigurationSetCommand, ConfigurationDeleteCommand>(args);
+            var parseResult = Parser.Default.ParseArguments<ConfigurationListCommand, ConfigurationGetCommand, ConfigurationSetCommand, ConfigurationDeleteCommand, ConfigurationNewKeyCommand>(args);
             var output = parseResult.MapResult(
                 (ConfigurationGetCommand cmd) => cmd.Execute(),
                 (ConfigurationSetCommand cmd) => cmd.Execute(),
                 (ConfigurationDeleteCommand cmd) => cmd.Execute(),
                 (ConfigurationListCommand cmd) => cmd.Execute(),
+                (ConfigurationNewKeyCommand cmd) => cmd.Execute(),
                 err =>
                 {
                     foreach(var e in err)

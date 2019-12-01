@@ -154,7 +154,10 @@ namespace SakartveloSoft.Configuration.CosmosDB
                 component = "root";
             }
             var filter = filterBuilder.Eq(a => a.Component, component);
-            filter = recursive ? filterBuilder.Regex(a => a.Path, new Regex(pathPrefix.ToString(asPrefix: true))) : filterBuilder.Eq(a => a.Path, pathPrefix.ToString());
+            if (!ConfigurationPath.IsNullOrEmpty(pathPrefix))
+            {
+                filter = recursive ? filterBuilder.Regex(a => a.Path, new Regex(pathPrefix.ToString(asPrefix: true))) : filterBuilder.Eq(a => a.Path, pathPrefix.ToString());
+            }
             if (forPages)
             {
                 filter = filter & filterBuilder.Eq(a => a.VisibleToPages, true);

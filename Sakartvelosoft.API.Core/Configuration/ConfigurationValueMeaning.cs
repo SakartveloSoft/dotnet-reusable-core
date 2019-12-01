@@ -16,6 +16,7 @@ namespace SakartveloSoft.API.Core.Configuration
         Float,
         Flag,
         Choice,
-        Bytes
+        Bytes,
+        KeyPair
     }
 }
