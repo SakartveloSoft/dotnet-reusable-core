@@ -30,7 +30,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakartveloSoft.Framework.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakartveloSoft.API.DatastoreAdaprers", "SakartveloSoft.API.DatastoreAdaprers\SakartveloSoft.API.DatastoreAdaprers.csproj", "{0CD4BF68-E30A-4489-B2E2-1FE198B1502F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakartveloSoft.Configuration.CosmosDB", "SakartveloSoft.Configuration.CosmosDB\SakartveloSoft.Configuration.CosmosDB.csproj", "{74BFAF2F-04DA-404F-9BEF-4DEEB3D59DA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakartveloSoft.Configuration.CosmosDB", "SakartveloSoft.Configuration.CosmosDB\SakartveloSoft.Configuration.CosmosDB.csproj", "{74BFAF2F-04DA-404F-9BEF-4DEEB3D59DA9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SakartveloSoft.Framework.Plugins.Runner", "SakartveloSoft.Framework.Plugins.Runner\SakartveloSoft.Framework.Plugins.Runner.csproj", "{90D961AE-07B4-4258-94FD-1E2550E39EB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SakartveloSoft.API.Framework.ModuleInterface", "SakartveloSoft.API.Framework.ModuleInterface\SakartveloSoft.API.Framework.ModuleInterface.csproj", "{9306495A-8EC7-453D-A8E3-CB63A99C4773}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -86,6 +90,14 @@ Global
 		{74BFAF2F-04DA-404F-9BEF-4DEEB3D59DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74BFAF2F-04DA-404F-9BEF-4DEEB3D59DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74BFAF2F-04DA-404F-9BEF-4DEEB3D59DA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90D961AE-07B4-4258-94FD-1E2550E39EB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D961AE-07B4-4258-94FD-1E2550E39EB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D961AE-07B4-4258-94FD-1E2550E39EB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D961AE-07B4-4258-94FD-1E2550E39EB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9306495A-8EC7-453D-A8E3-CB63A99C4773}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9306495A-8EC7-453D-A8E3-CB63A99C4773}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9306495A-8EC7-453D-A8E3-CB63A99C4773}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9306495A-8EC7-453D-A8E3-CB63A99C4773}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

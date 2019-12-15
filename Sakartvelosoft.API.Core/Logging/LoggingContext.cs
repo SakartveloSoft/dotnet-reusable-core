@@ -8,7 +8,6 @@ namespace SakartveloSoft.API.Core.Logging
 {
     public class LoggingContext
     {
-        private readonly LoggingContext parentContext;
         private readonly List<string> componentsPath = new List<string>();
         public IReadOnlyList<string> ComponentsPath => componentsPath;
 

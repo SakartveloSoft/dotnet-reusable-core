@@ -1,13 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>SakartveloSoft.API.Core</RootNamespace>
     <AssemblyName>SakartveloSoft.API.Core</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SakartveloSoft.API.Framework.ModuleInterface\SakartveloSoft.API.Framework.ModuleInterface.csproj" />
+    <ProjectReference Include="..\SakartveloSoft.API.Metadata\SakartveloSoft.API.Metadata.csproj" />
   </ItemGroup>
 
 </Project>
